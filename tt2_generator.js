@@ -74,7 +74,7 @@ const astralLocations = [
 ];
 
 const UI_DURATION = 250;
-const CLOSE_WIN_DURATION = 1000;
+const WIN_DURATION = 1000;
 const HIT_DURATION = 20;
 
 let next;
@@ -222,18 +222,18 @@ function pageDown(depth = 1) {
 
 function ensureEnlarged() {
     // Take your time with this shit
-    generateOneKey('1', CLOSE_WIN_DURATION); // random window
-    generateOneKey('4', CLOSE_WIN_DURATION); // window we care about
+    generateOneKey('1', WIN_DURATION); // random window
+    generateOneKey('4', WIN_DURATION); // window we care about
     pageUp();
     generateOneClick({X: 80.71, Y: 54.42 }); // Either the full screen button or nothing important
-    generateOneKey('4', CLOSE_WIN_DURATION); // close
+    generateOneKey('4', WIN_DURATION); // close
 }
 
 function ensureHeroMaxBuy() {
-    generateOneKey('2', CLOSE_WIN_DURATION);
+    generateOneKey('2', WIN_DURATION);
     generateOneClick({ X: 84.31, Y: 8.43 });
     generateOneClick({ X: 9.84, Y: 8.51 });
-    generateOneKey('2', CLOSE_WIN_DURATION);
+    generateOneKey('2', WIN_DURATION);
 }
 
 // Only way I know how to do this is to wait for potential boss timer to expire
@@ -259,20 +259,20 @@ function tapNineButtons(reversed) {
 }
 
 function onePageOfHeroes(reversed) {
-    generateOneKey('2');
+    generateOneKey('2', WIN_DURATION);
     pageUp();
     tapNineButtons(reversed);
-    generateOneKey('2', CLOSE_WIN_DURATION);
+    generateOneKey('2', WIN_DURATION);
 }
 
 function twoPagesOfHeroes(reversed) {
-    generateOneKey('2');
+    generateOneKey('2', WIN_DURATION);
     pageUp(); // Help ensure we line up with the taps
     pageDown();
     tapNineButtons();
     pageUp();
     tapNineButtons();
-    generateOneKey('2', CLOSE_WIN_DURATION);
+    generateOneKey('2', WIN_DURATION);
 }
 
 // mode: manic, normal, safe
@@ -329,7 +329,7 @@ function increaseSkills (max = false, skills = ['DS', 'HoM', 'WC', 'SC']) {
             generateOneClick({ X: levelUp.maxX, Y });
         }
     });
-    generateOneKey('1', CLOSE_WIN_DURATION);
+    generateOneKey('1', WIN_DURATION);
 }
 
 function manic60s () {
@@ -391,7 +391,8 @@ function bookOfShadows () {
 }
 
 // const outputPath = process.argv[2];
-const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+const outputPath = './macros';
 
 let name = '1 Initialize Skills';
 newAction(name);
@@ -463,8 +464,7 @@ writeIt(name);
 
 name = '5. Test'
 newAction(name);
-// activateSkills(['SC']);
-safe60s();
+twoPagesOfHeroes();
 // writeIt(name);
 
 function writeIt(name) {

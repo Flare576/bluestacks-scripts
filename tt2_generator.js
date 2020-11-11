@@ -2,6 +2,14 @@
 Rules: X/Y coords MUST have at least 1 decimal place
 MouseDown and first MouseMove must NOT have same values on a drag
 */
+/* Buy Set button bounding box
+85.89, 26.01   97.86, 24.51
+  _________________
+  |               |
+  |               |
+  |_______________|
+86.01, 31.21   98,75, 31.33
+*/
 /* Equipment drop bounding box:
 63.91, 43.98   87.02, 44.3
   _________________
@@ -59,9 +67,9 @@ const astralLocations = [
     { X: 30.32, Y: 73.14 },
     { X: 78.39, Y: 23.19 },
     { X: 78.22, Y: 23.19 },
-    { X: 96.65, Y: 28.46 },
-    { X: 91.46, Y: 26.58 },
-    { X: 86.93, Y: 28.09 },
+    { X: 98.65, Y: 26.71 },
+    // { X: 91.46, Y: 26.58 }, // Under button 1
+    // { X: 86.93, Y: 28.09 }, // Under button 1
     { X: 82.58, Y: 27.24 },
     { X: 96.98, Y: 35.91 },
     { X: 87.94, Y: 38.08 },
@@ -464,7 +472,10 @@ writeIt(name);
 
 name = '5. Test'
 newAction(name);
-twoPagesOfHeroes();
+// twoPagesOfHeroes();
+astralLocations.forEach(({ X, Y }) => {
+    generateOneClick({ X, Y, duration: HIT_DURATION });
+});
 // writeIt(name);
 
 function writeIt(name) {

@@ -216,6 +216,12 @@ function activateAllSkills() {
     activateSkills(['DS', 'HoM', 'WC', 'SC']);
 }
 
+function pagePartialUp(depth = 1) {
+    for (let i = 0; i < depth; i++) {
+        generateDrag({X: 49.21, Y: 16.27}, {X: 49.21, Y: 50.88});
+    }
+}
+
 function pageUp(depth = 1) {
     for (let i = 0; i < depth; i++) {
         generateDrag({X: 49.21, Y: 16.27}, {X: 49.21, Y: 93.88});
@@ -231,10 +237,10 @@ function pageDown(depth = 1) {
 function ensureEnlarged() {
     // Take your time with this shit
     generateOneKey('1', WIN_DURATION); // random window
-    generateOneKey('4', WIN_DURATION); // window we care about
+    generateOneKey('2', WIN_DURATION); // window we care about
     pageUp();
     generateOneClick({X: 80.71, Y: 54.42 }); // Either the full screen button or nothing important
-    generateOneKey('4', WIN_DURATION); // close
+    generateOneKey('2', WIN_DURATION); // close
 }
 
 function ensureHeroMaxBuy() {
@@ -266,21 +272,27 @@ function tapNineButtons(reversed) {
     }
 }
 
+function ensureClosed() {
+    generateOneKey('2');
+    generateOneKey('4');
+    generateOneKey('4');
+}
+
 function onePageOfHeroes(reversed) {
     generateOneKey('2', WIN_DURATION);
-    pageUp();
+    pagePartialUp();
     tapNineButtons(reversed);
-    generateOneKey('2', WIN_DURATION);
+    ensureClosed();
 }
 
 function twoPagesOfHeroes(reversed) {
     generateOneKey('2', WIN_DURATION);
-    pageUp(); // Help ensure we line up with the taps
+    pagePartialUp(); // Help ensure we line up with the taps
     pageDown();
     tapNineButtons();
     pageUp();
     tapNineButtons();
-    generateOneKey('2', WIN_DURATION);
+    ensureClosed();
 }
 
 // mode: manic, normal, safe
@@ -380,14 +392,18 @@ function lateLoop () {
 }
 
 function prestige () {
-    generateOneKey('1', UI_DURATION * 2);
+    generateOneKey('1', 2000);
     generateOneClick({ X: 83.24, Y: 28.89, duration: 2000});
-    generateOneClick({ X: 49.71, Y: 91.01, duration: 2000 }); // Event
-    generateOneClick({ X: 71.18, Y: 75.04, duration: 10000 }); // Event
-    // generateOneClick({ X: 49.71, Y: 81.46, duration: 2000 }); // Normal
-    // generateOneClick({ X: 67.94, Y: 67.72, duration: 10000 }); // Normal
+    generateOneClick({ X: 49.71, Y: 87.41, duration: 2000 }); // wtf? 2nd button
+    generateOneClick({ X: 68.34, Y: 71.41, duration: 2000 }); // wtf? 3nd button
+    // generateOneClick({ X: 49.71, Y: 91.01, duration: 2000 }); // Event 2nd buton
+    // generateOneClick({ X: 71.18, Y: 75.04, duration: 10000 }); // Event 3rd button
+    // generateOneClick({ X: 49.71, Y: 81.46, duration: 2000 }); // Normal 2nd buton
+    // generateOneClick({ X: 67.94, Y: 67.72, duration: 10000 }); // Normal 3rd button
     // Might see a warning about equipment; clicky!
     generateOneClick({ X: 50.88, Y: 65.81 });
+
+    // Last button during wtf: middle: [68.34,71.4], top: [68.34,68.48], bottom: [68.34,74.01]
 }
 
 function bookOfShadows () {
@@ -398,77 +414,68 @@ function bookOfShadows () {
     generateOneKey('5');
 }
 
-// const outputPath = process.argv[2];
-// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
-const outputPath = './macros';
+const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+// const outputPath = './macros';
 
-let name = '1 Initialize Skills';
-newAction(name);
-ensureEnlarged();
-ensureHeroMaxBuy();
-increaseSkills();
-manic60s();
-twoPagesOfHeroes();
-writeIt(name);
-
-name = '2.1 Manic Loop 60s';
-newAction(name);
-manic60s();
-writeIt(name);
-
-name = '2.2 Normal Loop 60s (HoM+SC)';
-newAction(name);
-normal60s(['HoM', 'SC']);
-writeIt(name);
-
-name = '2.3 Safe Loop 60s (HoM+SC)';
-newAction(name);
-safe60s(['HoM', 'SC']);
-writeIt(name);
-
-name = '2.4 Split Loop 120s (HoM+SC)';
-newAction(name);
-safe60s(['HoM', 'SC']);
-writeIt(name);
-
-name = '2.5 10s Pause';
-newAction(name);
-sleep(10000);
-writeIt(name);
-
-name = '3.1 Mid Transition [Max DS]';
-newAction(name);
-increaseSkills(true, ['DS']);
-writeIt(name);
-
-name = '3.2 Late Transition [Max WC]';
-newAction(name);
-increaseSkills(true, ['WC']);
-writeIt(name);
-
-name = '3.3 Prestige';
-newAction(name);
-prestige();
-writeIt(name);
-
-name = '3.4 BoS Max Upgrade';
-newAction(name);
-bookOfShadows();
-writeIt(name);
-
-name = '4.1 Mid Loop x3 with Leave-Join'
-newAction(name);
-for (let j = 0; j < 3; j++) midLoop();
-increaseSkills(false, ['DS']);
-sleep(5000); // Buffer
-writeIt(name);
-
-name = '4.2 Late Loop x3 with 90s pause'
-newAction(name);
-for (let j = 0; j < 3; j++) lateLoop();
-increaseSkills(false, ['DS', 'WC']);
-ensureNotWaitingForBoss();
-writeIt(name);
+let macros = [{
+    name: '1 Initialize Skills',
+    calls: [
+        { fn: ensureEnlarged, },
+        { fn: ensureHeroMaxBuy },
+        { fn: increaseSkills },
+        { fn: manic60s },
+        { fn: twoPagesOfHeroes },
+    ],
+},{
+    name: '2.2 Normal Loop 60s (HoM+SC)',
+    calls: [ {fn: normal60s, params: [['HoM', 'SC']]} ],
+},{
+    name: '2.1 Manic Loop 60s',
+    calls: [{fn: manic60s}],
+},{
+    name: '2.2 Normal Loop 60s (HoM+SC)',
+    calls: [{fn: normal60s, parms: [['HoM', 'SC']]}],
+},{
+    name: '2.3 Safe Loop 60s (HoM+SC)',
+    calls: [{fn: safe60s, params: [['HoM', 'SC']]}],
+},{
+    name: '2.4 Split Loop 120s (HoM+SC)',
+    calls: [{fn: safe60s, params: [['HoM', 'SC']]}],
+},{
+    name: '2.5 10s Pause',
+    calls: [{fn: sleep, params: [10000]}],
+},{
+    name: '3.1 Mid Transition [Max DS]',
+    calls: [{fn: increaseSkills, params: [true, ['DS']]}],
+},{
+    name: '3.2 Late Transition [Max WC]',
+    calls: [{fn: increaseSkills, params: [true, ['WC']]}],
+},{
+    name: '3.3 Prestige',
+    calls: [{fn: prestige}],
+},{
+    name: '3.4 BoS Max Upgrade',
+    calls: [{fn: bookOfShadows}],
+},{
+    name: '4.1 Mid Loop x3 with start pause',
+    calls: [
+        { fn: ensureNotWaitingForBoss },
+        { fn: midLoop }, { fn: midLoop }, { fn: midLoop },
+        { fn: increaseSkills, params: [false, ['DS']] },
+    ],
+},{
+    name: '4.2 Late Loop x3 with start pause',
+    calls: [
+        { fn: ensureNotWaitingForBoss },
+        { fn: lateLoop }, { fn: lateLoop }, { fn: lateLoop },
+        { fn: increaseSkills, params: [false, ['DS', 'WC']] },
+    ],
+}];
+macros.forEach(macro => {
+    newAction(macro.name);
+    macro.calls.forEach(({fn, params = []}) => fn(...params));
+    writeIt(macro.name);
+});
 
 name = '5. Test'
 newAction(name);

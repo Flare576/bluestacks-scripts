@@ -423,57 +423,84 @@ let macros = [{
         { fn: ensureEnlarged, },
         { fn: ensureHeroMaxBuy },
         { fn: increaseSkills },
-        { fn: manic60s },
+        { fn: tapFor, params: [60000, 'manic'] },
         { fn: twoPagesOfHeroes },
     ],
 },{
-    name: '2.2 Normal Loop 60s (HoM+SC)',
-    calls: [ {fn: normal60s, params: [['HoM', 'SC']]} ],
+    name: '2 Early Loop (120s)',
+    calls: [
+        {fn: tapFor, params: [115000, 'manic']},
+        {fn: onePageOfHeroes},
+        {fn: sleep, params: [2000]}, // Loop marker
+    ],
 },{
-    name: '2.1 Manic Loop 60s',
-    calls: [{fn: manic60s}],
-},{
-    name: '2.2 Normal Loop 60s (HoM+SC)',
-    calls: [{fn: normal60s, parms: [['HoM', 'SC']]}],
-},{
-    name: '2.3 Safe Loop 60s (HoM+SC)',
-    calls: [{fn: safe60s, params: [['HoM', 'SC']]}],
-},{
-    name: '2.4 Split Loop 120s (HoM+SC)',
-    calls: [{fn: safe60s, params: [['HoM', 'SC']]}],
-},{
-    name: '2.5 10s Pause',
-    calls: [{fn: sleep, params: [10000]}],
-},{
-    name: '3.1 Mid Transition [Max DS]',
+    name: '3 Mid Transition [Max DS]',
     calls: [{fn: increaseSkills, params: [true, ['DS']]}],
 },{
-    name: '3.2 Late Transition [Max WC]',
+    name: '4 Mid Loop (360s) with start pause',
+    calls: [
+        { fn: ensureNotWaitingForBoss },
+        { fn: increaseSkills, params: [false, ['DS']] },
+        { fn: midLoop }, { fn: midLoop }, { fn: midLoop },
+    ],
+},{
+    name: '5 Late Transition [Max WC]',
     calls: [{fn: increaseSkills, params: [true, ['WC']]}],
 },{
-    name: '3.3 Prestige',
+    name: '6 Late Loop (360s) with start pause',
+    calls: [
+        { fn: ensureNotWaitingForBoss },
+        { fn: increaseSkills, params: [false, ['DS', 'WC']] },
+        { fn: lateLoop }, { fn: lateLoop }, { fn: lateLoop },
+    ],
+},{
+    name: '7 Prestige',
     calls: [{fn: prestige}],
 },{
-    name: '3.4 BoS Max Upgrade',
+    name: '8 BoS Max Upgrade',
     calls: [{fn: bookOfShadows}],
-},{
-    name: '4.1 Mid Loop x3 with start pause',
-    calls: [
-        { fn: ensureNotWaitingForBoss },
-        { fn: midLoop }, { fn: midLoop }, { fn: midLoop },
-        { fn: increaseSkills, params: [false, ['DS']] },
-    ],
-},{
-    name: '4.2 Late Loop x3 with start pause',
-    calls: [
-        { fn: ensureNotWaitingForBoss },
-        { fn: lateLoop }, { fn: lateLoop }, { fn: lateLoop },
-        { fn: increaseSkills, params: [false, ['DS', 'WC']] },
-    ],
 }];
 macros.forEach(macro => {
     newAction(macro.name);
     macro.calls.forEach(({fn, params = []}) => fn(...params));
+    writeIt(macro.name);
+});
+
+const merged = [
+    { name: 'PUSH', MergedMacroConfigurations: [
+        { MacrosToRun: [ '1 Initialize Skills' ], LoopCount: 1 },
+        { MacrosToRun: [ '2 Early Loop (120s)' ], LoopCount: 10 },
+        { MacrosToRun: [ '3 Mid Transition [Max DS]' ], LoopCount: 1 },
+        { MacrosToRun: [ '4 Mid Loop (360s) with start pause' ], LoopCount: 1 },
+        { MacrosToRun: [ '5 Late Transition [Max WC]' ], LoopCount: 1 },
+        { MacrosToRun: [ '6 Late Loop (360s) with start pause' ], LoopCount: 2 },
+        { MacrosToRun: [ '7 Prestige' ], LoopCount: 1 },
+    ]},
+    { name: 'FARM', MergedMacroConfigurations: [
+        { MacrosToRun: [ '1 Initialize Skills' ], LoopCount: 1 },
+        { MacrosToRun: [ '2 Early Loop (120s)' ], LoopCount: 10 },
+        { MacrosToRun: [ '3 Mid Transition [Max DS]' ], LoopCount: 1 },
+        { MacrosToRun: [ '4 Mid Loop (360s) with start pause' ], LoopCount: 1 },
+        { MacrosToRun: [ '5 Late Transition [Max WC]' ], LoopCount: 1 },
+        { MacrosToRun: [ '6 Late Loop (360s) with start pause' ], LoopCount: 1 },
+        { MacrosToRun: [ '7 Prestige' ], LoopCount: 1 },
+        { MacrosToRun: [ '8 BoS Max Upgrade' ], LoopCount: 1 },
+    ]},
+];
+
+merged.forEach(({name, MergedMacroConfigurations}) => {
+    newAction(name);
+    delete action.Events;
+    action.MergedMacroConfigurations = [];
+    MergedMacroConfigurations.forEach(({MacrosToRun, LoopCount}) => {
+        action.MergedMacroConfigurations.push({
+            MacrosToRun,
+            LoopCount,
+            LoopInterval: 0,
+            DelayNextScript: 0,
+            Acceleration: 1.0,
+        });
+    });
     writeIt(macro.name);
 });
 

@@ -189,20 +189,6 @@ function clickContinue () {
     generateOneClick({ X: 71.11, Y: 73.11, duration: HIT_DURATION});
 }
 
-function generateClickFairies() {
-    // Fairies fly along Y: 22/23 from X:12 to X:98
-    // Every fairy could possibly trigger a "Continue"/"View Ad" window
-    // Assume user has paid version, click "continue" button between each fairy click attempt
-    // Should take ~2 secs to go full distance
-    // click every 1 X values, total of 86 clicks, or 43/s
-    let Y = 22.5;
-    for (let X = 13.1; X < 98; X += 1) {
-        generateOneClick({X, Y, duration: HIT_DURATION});
-        clickContinue();
-    }
-    clickContinue();
-}
-
 function activateSkills(skills) {
     const { activate } = allSkills;
     const { Y } = activate;

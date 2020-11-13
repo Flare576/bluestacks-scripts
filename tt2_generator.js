@@ -64,7 +64,6 @@ const astralLocations = [
     { X: 96.31, Y: 18.28 },
     { X: 93.31, Y: 21.02 },
     { X: 86.93, Y: 21.21 },
-    { X: 30.32, Y: 73.14 },
     { X: 78.39, Y: 23.19 },
     { X: 78.22, Y: 23.19 },
     { X: 98.65, Y: 26.71 },
@@ -309,9 +308,6 @@ function tapFor(time, mode, skills = ['HoM', 'SC']) {
         activateSkills(skills);
         // Crew
         generateOneClick({ X: 36.59, Y: 49.63, duration: HIT_DURATION });
-        // Pet
-        // generateOneClick({ X: 58.84, Y: 48.44, duration: HIT_DURATION });
-        generateOneClick({ X: 52.92, Y: 48.64, duration: HIT_DURATION });
         // Astral Awakening
         for (let i = 0; i < 2; i++) {
             astralLocations.forEach(({ X, Y }) => {
@@ -329,6 +325,9 @@ function tapFor(time, mode, skills = ['HoM', 'SC']) {
         generateOneClick({ X: 49.64, Y: 40.77, duration: daggerDuration });
         generateOneClick({ X: 57.35, Y: 39.89, duration: daggerDuration });
         generateOneClick({ X: 64.48, Y: 39.09, duration: daggerDuration });
+
+        // Pet
+        generateOneClick({ X: 52.92, Y: 48.64, duration: HIT_DURATION });
     }
 }
 
@@ -382,7 +381,10 @@ function splitLoop (skills) {
 function midLoop () {
     const skills = ['HoM', 'WC', 'SC'];
     activateSkills(skills);
-    splitLoop(skills);
+    generateClickFairies();
+    activateAllSkills();
+    onePageOfHeroes(true);
+    tapFor(120000, 'normal', skills);
 }
 
 function lateLoop () {
@@ -394,8 +396,8 @@ function lateLoop () {
 function prestige () {
     generateOneKey('1', 2000);
     generateOneClick({ X: 83.24, Y: 28.89, duration: 2000});
-    generateOneClick({ X: 49.71, Y: 87.41, duration: 2000 }); // wtf? 2nd button
-    generateOneClick({ X: 68.34, Y: 71.41, duration: 2000 }); // wtf? 3nd button
+    generateOneClick({ X: 49.71, Y: 88.50, duration: 2000 });
+    generateOneClick({ X: 68.34, Y: 72.81, duration: 15000 });
     // generateOneClick({ X: 49.71, Y: 91.01, duration: 2000 }); // Event 2nd buton
     // generateOneClick({ X: 71.18, Y: 75.04, duration: 10000 }); // Event 3rd button
     // generateOneClick({ X: 49.71, Y: 81.46, duration: 2000 }); // Normal 2nd buton
@@ -403,18 +405,21 @@ function prestige () {
     // Might see a warning about equipment; clicky!
     generateOneClick({ X: 50.88, Y: 65.81 });
 
+    // 2nd button during Event?: middle: [49.51, 91.15], top: [49.51, 87.86], bottom[49.51, 93.76]
+    // Last button during Event?: middle: [68.26, 75.54], top: [67.26, 72.51], bottom[69.26, 77.88]
     // Last button during wtf: middle: [68.34,71.4], top: [68.34,68.48], bottom: [68.34,74.01]
 }
 
 function bookOfShadows () {
-    generateOneKey('5');
+    generateOneKey('5', WIN_DURATION);
     for ( let i = 0; i < 6; i++) {
         generateOneClick({ X: 84.26, Y: 28.71 });
     }
-    generateOneKey('5');
+    generateOneKey('5', WIN_DURATION);
 }
 
-const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+const outputPath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
 // const outputPath = './macros';
 
 let macros = [{
@@ -434,73 +439,39 @@ let macros = [{
         {fn: sleep, params: [2000]}, // Loop marker
     ],
 },{
-    name: '3 Mid Transition [Max DS]',
+    name: '3.1 Break for boss reset',
+    calls: [{ fn: ensureNotWaitingForBoss }],
+},{
+    name: '3.2 Mid Transition [Max DS]',
     calls: [{fn: increaseSkills, params: [true, ['DS']]}],
 },{
-    name: '4 Mid Loop (360s) with start pause',
+    name: '3.3 Mid Loop (360s) with start pause',
     calls: [
-        { fn: ensureNotWaitingForBoss },
         { fn: increaseSkills, params: [false, ['DS']] },
         { fn: midLoop }, { fn: midLoop }, { fn: midLoop },
     ],
 },{
-    name: '5 Late Transition [Max WC]',
+    name: '4.1 Break for boss reset',
+    calls: [{ fn: ensureNotWaitingForBoss }],
+},{
+    name: '4.2 Late Transition [Max WC]',
     calls: [{fn: increaseSkills, params: [true, ['WC']]}],
 },{
-    name: '6 Late Loop (360s) with start pause',
+    name: '4.3 Late Loop (360s) with start pause',
     calls: [
-        { fn: ensureNotWaitingForBoss },
         { fn: increaseSkills, params: [false, ['DS', 'WC']] },
         { fn: lateLoop }, { fn: lateLoop }, { fn: lateLoop },
     ],
 },{
-    name: '7 Prestige',
+    name: '5.1 Prestige',
     calls: [{fn: prestige}],
 },{
-    name: '8 BoS Max Upgrade',
+    name: '5.2 BoS Max Upgrade',
     calls: [{fn: bookOfShadows}],
 }];
 macros.forEach(macro => {
     newAction(macro.name);
     macro.calls.forEach(({fn, params = []}) => fn(...params));
-    writeIt(macro.name);
-});
-
-const merged = [
-    { name: 'PUSH', MergedMacroConfigurations: [
-        { MacrosToRun: [ '1 Initialize Skills' ], LoopCount: 1 },
-        { MacrosToRun: [ '2 Early Loop (120s)' ], LoopCount: 10 },
-        { MacrosToRun: [ '3 Mid Transition [Max DS]' ], LoopCount: 1 },
-        { MacrosToRun: [ '4 Mid Loop (360s) with start pause' ], LoopCount: 1 },
-        { MacrosToRun: [ '5 Late Transition [Max WC]' ], LoopCount: 1 },
-        { MacrosToRun: [ '6 Late Loop (360s) with start pause' ], LoopCount: 2 },
-        { MacrosToRun: [ '7 Prestige' ], LoopCount: 1 },
-    ]},
-    { name: 'FARM', MergedMacroConfigurations: [
-        { MacrosToRun: [ '1 Initialize Skills' ], LoopCount: 1 },
-        { MacrosToRun: [ '2 Early Loop (120s)' ], LoopCount: 10 },
-        { MacrosToRun: [ '3 Mid Transition [Max DS]' ], LoopCount: 1 },
-        { MacrosToRun: [ '4 Mid Loop (360s) with start pause' ], LoopCount: 1 },
-        { MacrosToRun: [ '5 Late Transition [Max WC]' ], LoopCount: 1 },
-        { MacrosToRun: [ '6 Late Loop (360s) with start pause' ], LoopCount: 1 },
-        { MacrosToRun: [ '7 Prestige' ], LoopCount: 1 },
-        { MacrosToRun: [ '8 BoS Max Upgrade' ], LoopCount: 1 },
-    ]},
-];
-
-merged.forEach(({name, MergedMacroConfigurations}) => {
-    newAction(name);
-    delete action.Events;
-    action.MergedMacroConfigurations = [];
-    MergedMacroConfigurations.forEach(({MacrosToRun, LoopCount}) => {
-        action.MergedMacroConfigurations.push({
-            MacrosToRun,
-            LoopCount,
-            LoopInterval: 0,
-            DelayNextScript: 0,
-            Acceleration: 1.0,
-        });
-    });
     writeIt(macro.name);
 });
 

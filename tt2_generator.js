@@ -2,7 +2,7 @@
 Rules: X/Y coords MUST have at least 1 decimal place
 MouseDown and first MouseMove must NOT have same values on a drag
 */
-/* Buy Set button bounding box
+/* Buy Complete Set button bounding box
 85.89, 26.01   97.86, 24.51
   _________________
   |               |
@@ -36,7 +36,7 @@ const allSkills = {
         FS: 66.33,
         WC: 75.33,
         SC: 84.35,
-        oneX: 83.55,
+        oneX: 93.55,
         maxX: 58.93,
     },
 };
@@ -118,8 +118,8 @@ function sleep (duration = 0) {
     // Sleeping for long durations seems like it might stop the macro.... limit to 10s
     let start = next;
     while (next - start < duration) {
-        generateOneKey('4');
-        generateOneKey('4');
+        generateOneKey('2');
+        generateOneKey('2');
         const passed = next - start;
         const left = Math.max(0, duration - (next - start))
         next += Math.min(10000, left);
@@ -136,7 +136,6 @@ function generateOneClick ({ duration = UI_DURATION, Delta = 0, ...rest }){
     addEvent({ ...rest, Delta, EventType: 'MouseUp', duration });
 }
 
-        // generateDrag({X: 49, Y: 16.27}, {X: 49, Y:93.88});
 function generateDrag ({ X: startX, Y: startY }, { X: endX, Y: endY }) {
     const Delta = 0;
     addEvent({
@@ -185,8 +184,55 @@ function generateDrag ({ X: startX, Y: startY }, { X: endX, Y: endY }) {
     });
 }
 
+function ensureClosed() {
+    // Tap Hero panel
+    generateOneClick({X: 1.82, Y: 98.91, duration: HIT_DURATION});
+    generateOneClick({X: 1.82, Y: 98.91, duration: HIT_DURATION});
+    generateOneClick({X: 1.82, Y: 98.91});
+    generateOneKey('4', WIN_DURATION);
+    generateOneKey('4', WIN_DURATION);
+    clickContinue();
+}
+
+function onePageOfHeroes(reversed) {
+    generateOneKey('2', WIN_DURATION);
+    pagePartialUp();
+    tapNineButtons(reversed);
+    ensureClosed();
+}
+
+function twoPagesOfHeroes(reversed) {
+    generateOneKey('2', WIN_DURATION);
+    pagePartialUp(); // Help ensure we line up with the taps
+    pageDown();
+    tapNineButtons();
+    pageUp();
+    tapNineButtons();
+    ensureClosed();
+}
+
+// skills: see "allSkills" above
+function increaseSkills (max = false, skills = ['DS', 'HoM', 'WC', 'SC']) {
+    const { levelUp } = allSkills;
+    generateOneKey('1');
+    pageUp();
+    // Level up Sword Dude
+    generateOneClick({ X: 84.11, Y: 16.06 });
+
+    skills.forEach(skill => {
+        const Y = levelUp[skill];
+        generateOneClick({ X: levelUp.oneX, Y });
+        if(max) {
+            generateOneClick({ X: levelUp.oneX, Y });
+            generateOneClick({ X: levelUp.maxX, Y });
+        }
+    });
+    ensureClosed();
+}
+
+
 function clickContinue () {
-    generateOneClick({ X: 71.11, Y: 73.11, duration: HIT_DURATION});
+    generateOneClick({ X: 71.11, Y: 73.11, duration: HIT_DURATION * 2});
 }
 
 function activateSkills(skills) {
@@ -223,7 +269,6 @@ function ensureEnlarged() {
     // Take your time with this shit
     generateOneKey('1', WIN_DURATION); // random window
     generateOneKey('2', WIN_DURATION); // window we care about
-    pageUp();
     generateOneClick({X: 80.71, Y: 54.42 }); // Either the full screen button or nothing important
     generateOneKey('2', WIN_DURATION); // close
 }
@@ -237,47 +282,39 @@ function ensureHeroMaxBuy() {
 
 // Only way I know how to do this is to wait for potential boss timer to expire
 function ensureNotWaitingForBoss() {
-    sleep(90000);
+    sleep(95000);
     generateOneKey('B');
 }
 
 function tapNineButtons(reversed) {
     // we actually tap 18 times, juuuust in case
     // the screen is off a bit
-    const X = 83.38;
-    let start = 87.65;
-    let inc = 4.5;
-    if (reversed) {
-        start = 15.65;
-        inc = -9;
-    }
-    for ( let i = 0; i < 18; i++) {
-        const Y = +(start - (inc * i)).toFixed(2);
+    const X = 93.38;
+    // X: 69 -> 98.24
+    let points = [
+        {X, Y: 87.65},
+        {X, Y: 83.15},
+        {X, Y: 78.65},
+        {X, Y: 74.15},
+        {X, Y: 69.65},
+        {X, Y: 65.15},
+        {X, Y: 60.65},
+        {X, Y: 56.15},
+        {X, Y: 51.65},
+        {X, Y: 47.15},
+        {X, Y: 42.65},
+        {X, Y: 38.15},
+        {X:X-20, Y: 33.65},
+        {X:X-20, Y: 29.15},
+        {X:X-20, Y: 24.65},
+        {X, Y: 20.15},
+        {X, Y: 15.65},
+    ];
+    points = reversed ? points.reverse() : points;
+
+    points.forEach(({X, Y}) => {
         generateOneClick({ X, Y, duration: UI_DURATION / 2 });
-    }
-}
-
-function ensureClosed() {
-    generateOneKey('2');
-    generateOneKey('4');
-    generateOneKey('4');
-}
-
-function onePageOfHeroes(reversed) {
-    generateOneKey('2', WIN_DURATION);
-    pagePartialUp();
-    tapNineButtons(reversed);
-    ensureClosed();
-}
-
-function twoPagesOfHeroes(reversed) {
-    generateOneKey('2', WIN_DURATION);
-    pagePartialUp(); // Help ensure we line up with the taps
-    pageDown();
-    tapNineButtons();
-    pageUp();
-    tapNineButtons();
-    ensureClosed();
+    });
 }
 
 // mode: manic, normal, safe
@@ -317,68 +354,7 @@ function tapFor(time, mode, skills = ['HoM', 'SC']) {
     }
 }
 
-// skills: see "allSkills" above
-function increaseSkills (max = false, skills = ['DS', 'HoM', 'WC', 'SC']) {
-    const { levelUp } = allSkills;
-    generateOneKey('1');
-    pageUp();
-    // Level up Sword Dude
-    generateOneClick({ X: 84.11, Y: 16.06 });
-
-    skills.forEach(skill => {
-        const Y = levelUp[skill];
-        generateOneClick({ X: levelUp.oneX, Y });
-        if(max) {
-            // Need to handle if above canceled active skill
-            generateOneClick({ X: levelUp.oneX, Y });
-            generateOneClick({ X: levelUp.maxX, Y });
-        }
-    });
-    generateOneKey('1', WIN_DURATION);
-}
-
-function manic60s () {
-    onePageOfHeroes();
-    tapFor(50000, 'manic');
-    sleep(2000); // visible loop marker
-}
-
-function normal60s (skills) {
-    onePageOfHeroes();
-    tapFor(50000, 'normal', skills);
-    sleep(2000); // visible loop marker
-}
-
-function safe60s (skills) {
-    onePageOfHeroes();
-    tapFor(50000, 'safe', skills);
-    sleep(2000); // visible loop marker
-}
-
-function splitLoop (skills) {
-    generateClickFairies();
-    activateAllSkills();
-    onePageOfHeroes(true);
-    tapFor(60000, 'normal', skills);
-    onePageOfHeroes(true);
-    tapFor(45000, 'safe', skills);
-}
-
-function midLoop () {
-    const skills = ['HoM', 'WC', 'SC'];
-    activateSkills(skills);
-    generateClickFairies();
-    activateAllSkills();
-    onePageOfHeroes(true);
-    tapFor(120000, 'normal', skills);
-}
-
-function lateLoop () {
-    const skills = ['HoM','SC'];
-    activateSkills(skills);
-    splitLoop(skills);
-}
-
+// TODO: this is still clunky
 function prestige () {
     generateOneKey('1', 2000);
     generateOneClick({ X: 83.24, Y: 28.89, duration: 2000});
@@ -401,14 +377,20 @@ function bookOfShadows () {
     for ( let i = 0; i < 6; i++) {
         generateOneClick({ X: 84.26, Y: 28.71 });
     }
-    generateOneKey('5', WIN_DURATION);
+    ensureClosed();
 }
 
-// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
-const outputPath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
+// -------- Macro generation ------
+
+function writeIt(name) {
+    fs.writeFileSync(`${outputPath}/${name}.json`, JSON.stringify(action, null, 2));
+}
+
+const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+// const outputPath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
 // const outputPath = './macros';
 
-let macros = [{
+[{
     name: '1 Initialize Skills',
     calls: [
         { fn: ensureEnlarged, },
@@ -422,31 +404,30 @@ let macros = [{
     calls: [
         {fn: tapFor, params: [115000, 'manic']},
         {fn: onePageOfHeroes},
-        {fn: sleep, params: [2000]}, // Loop marker
     ],
 },{
-    name: '3.1 Break for boss reset',
-    calls: [{ fn: ensureNotWaitingForBoss }],
-},{
-    name: '3.2 Mid Transition [Max DS]',
+    name: '3.1 Mid Transition [Max DS]',
     calls: [{fn: increaseSkills, params: [true, ['DS']]}],
 },{
-    name: '3.3 Mid Loop (360s) with start pause',
+    name: '3.2 Mid Loop (120s)',
     calls: [
-        { fn: increaseSkills, params: [false, ['DS']] },
-        { fn: midLoop }, { fn: midLoop }, { fn: midLoop },
+        { fn: onePageOfHeroes, params: [true] },
+        { fn: tapFor, params: [120000, 'normal', ['HoM', 'WC', 'SC']]},
     ],
 },{
     name: '4.1 Break for boss reset',
-    calls: [{ fn: ensureNotWaitingForBoss }],
+    calls: [
+        { fn: increaseSkills, params: [false, ['DS']] },
+        { fn: ensureNotWaitingForBoss }
+    ],
 },{
     name: '4.2 Late Transition [Max WC]',
     calls: [{fn: increaseSkills, params: [true, ['WC']]}],
 },{
-    name: '4.3 Late Loop (360s) with start pause',
+    name: '4.3 Late Loop (120s)',
     calls: [
-        { fn: increaseSkills, params: [false, ['DS', 'WC']] },
-        { fn: lateLoop }, { fn: lateLoop }, { fn: lateLoop },
+        { fn: onePageOfHeroes, params: [true] },
+        { fn: tapFor, params: [120000, 'normal', ['HoM', 'SC']]},
     ],
 },{
     name: '5.1 Prestige',
@@ -454,24 +435,64 @@ let macros = [{
 },{
     name: '5.2 BoS Max Upgrade',
     calls: [{fn: bookOfShadows}],
-}];
-macros.forEach(macro => {
+}].forEach(macro => {
     newAction(macro.name);
     macro.calls.forEach(({fn, params = []}) => fn(...params));
     writeIt(macro.name);
 });
 
-name = '5. Test'
-newAction(name);
-// twoPagesOfHeroes();
-astralLocations.forEach(({ X, Y }) => {
-    generateOneClick({ X, Y, duration: HIT_DURATION });
-});
-// writeIt(name);
+// Raids
+const titan = {
+    'Left Arm': {X: 13.31, Y: 37.79},
+    'Head': {X: 50.75, Y: 34.51},
+    'Right Arm': {X: 82.09, Y: 38.17},
+    'Left Hand': {X: 13.16, Y: 58.93},
+    'Body': {X: 48.17, Y: 47.79},
+    'Right Hand': {X: 86.43, Y: 57.18},
+    'Left Leg': {X: 31.48, Y: 75.88},
+    'Right Leg': {X: 64.59, Y: 75.57},
+};
+const parts = Object.keys(titan);
 
-function writeIt(name) {
-    fs.writeFileSync(`${outputPath}/${name}.json`, JSON.stringify(action, null, 2));
+function titanMoves (X, Y, count, duration) {
+    for (let i = 0; i < count; i++) {
+        // random number between .5 and -.5
+        const ox = (Math.random() * 2) - .5;
+        const oy = Math.random() - .5;
+
+        addEvent({ X: X+ox, Y:Y+oy, Delta: 0, EventType: 'MouseMove', duration });
+    }
 }
 
-// generateScript();
-// console.log(JSON.stringify(action, null, 2));
+parts.forEach(key => {
+    name = `Titan ${key}`;
+    const duration = 15;
+    newAction(name);
+    const {X, Y} = titan[key];
+    addEvent({ X, Y, Delta: 0, EventType: 'MouseDown', duration });
+    titanMoves( X, Y, 2100, duration);
+    addEvent({X,Y, Delta: 0, EventType: 'MouseUp', duration });
+    writeIt(name);
+});
+
+name = 'Titan - Full Loop';
+newAction(name);
+const duration = 15;
+const {X, Y} = titan['Head'];
+addEvent({ X, Y, Delta: 0, EventType: 'MouseDown', duration });
+for (let i = 0; i < 8; i++) {
+    parts.forEach(key => {
+        const {X, Y} = titan[key];
+        titanMoves(X, Y, 35, duration);
+    });
+}
+addEvent({X,Y, Delta: 0, EventType: 'MouseUp', duration });
+writeIt(name);
+
+// Testing
+name = '5. Test'
+newAction(name);
+for (let i = 0; i < 510; i++) {
+    generateOneClick( {X: 48.71, Y: 36.11, duration: HIT_DURATION});
+}
+writeIt(name);

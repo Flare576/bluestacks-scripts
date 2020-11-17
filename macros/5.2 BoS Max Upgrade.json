@@ -1,0 +1,188 @@
+{
+  "TimeCreated": "20201117T012635",
+  "Name": "5.2 BoS Max Upgrade",
+  "Events": [
+    {
+      "KeyName": "5",
+      "EventType": "KeyDown",
+      "Timestamp": 1000
+    },
+    {
+      "KeyName": "5",
+      "EventType": "KeyUp",
+      "Timestamp": 1050
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 2050
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 2100
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 2350
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 2400
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 2650
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 2700
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 2950
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 3000
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 3250
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 3300
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 3550
+    },
+    {
+      "X": 84.26,
+      "Y": 28.71,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 3600
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 3850
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 3900
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 3920
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 3970
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 3990
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 4040
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyDown",
+      "Timestamp": 4290
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyUp",
+      "Timestamp": 4340
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyDown",
+      "Timestamp": 5340
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyUp",
+      "Timestamp": 5390
+    },
+    {
+      "X": 71.11,
+      "Y": 73.11,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 6390
+    },
+    {
+      "X": 71.11,
+      "Y": 73.11,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 6440
+    }
+  ],
+  "LoopType": "TillLoopNumber",
+  "LoopNumber": 1,
+  "LoopTime": 0,
+  "LoopInterval": 0,
+  "Acceleration": "1.0",
+  "PlayOnStart": false,
+  "DonotShowWindowOnFinish": false,
+  "RestartPlayer": false,
+  "RestartPlayerAfterMinutes": 60,
+  "ShortCut": "",
+  "UserName": "",
+  "MacroId": ""
+}

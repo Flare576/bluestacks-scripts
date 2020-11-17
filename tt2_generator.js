@@ -310,7 +310,7 @@ function tapNineButtons(reversed) {
         {X, Y: 20.15},
         {X, Y: 15.65},
     ];
-    points = reversed ? points.reverse() : points;
+    reversed && points.reverse();
 
     points.forEach(({X, Y}) => {
         generateOneClick({ X, Y, duration: UI_DURATION / 2 });
@@ -343,14 +343,27 @@ function tapFor(time, mode, skills = ['HoM', 'SC']) {
             clickContinue();
         }
         // Daggers
+        activateSkills(skills);
         generateOneClick({ X: 34.66, Y: 40.13, duration: daggerDuration });
+        activateSkills(skills);
         generateOneClick({ X: 42.08, Y: 40.13, duration: daggerDuration });
+        activateSkills(skills);
         generateOneClick({ X: 49.64, Y: 40.77, duration: daggerDuration });
+        activateSkills(skills);
         generateOneClick({ X: 57.35, Y: 39.89, duration: daggerDuration });
+        activateSkills(skills);
         generateOneClick({ X: 64.48, Y: 39.09, duration: daggerDuration });
+        //generateOneClick({ X: 34.66, Y: 40.13, duration: daggerDuration });
+        //generateOneClick({ X: 42.08, Y: 40.13, duration: daggerDuration });
+        //generateOneClick({ X: 49.64, Y: 40.77, duration: daggerDuration });
+        //generateOneClick({ X: 57.35, Y: 39.89, duration: daggerDuration });
+        //generateOneClick({ X: 64.48, Y: 39.09, duration: daggerDuration });
 
         // Pet
         generateOneClick({ X: 52.92, Y: 48.64, duration: HIT_DURATION });
+
+        // Stupid map transition...
+        ensureClosed();
     }
 }
 
@@ -386,9 +399,9 @@ function writeIt(name) {
     fs.writeFileSync(`${outputPath}/${name}.json`, JSON.stringify(action, null, 2));
 }
 
-const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
 // const outputPath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
-// const outputPath = './macros';
+const outputPath = './macros';
 
 [{
     name: '1 Initialize Skills',
@@ -412,7 +425,7 @@ const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
     name: '3.2 Mid Loop (120s)',
     calls: [
         { fn: onePageOfHeroes, params: [true] },
-        { fn: tapFor, params: [120000, 'normal', ['HoM', 'WC', 'SC']]},
+        { fn: tapFor, params: [120000, 'normal', ['DS', 'HoM', 'WC', 'SC']]},
     ],
 },{
     name: '4.1 Break for boss reset',
@@ -427,7 +440,7 @@ const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
     name: '4.3 Late Loop (120s)',
     calls: [
         { fn: onePageOfHeroes, params: [true] },
-        { fn: tapFor, params: [120000, 'normal', ['HoM', 'SC']]},
+        { fn: tapFor, params: [120000, 'normal', ['DS', 'HoM', 'WC', 'SC']]},
     ],
 },{
     name: '5.1 Prestige',

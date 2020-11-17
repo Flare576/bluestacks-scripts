@@ -1,0 +1,208 @@
+{
+  "TimeCreated": "20201117T024124",
+  "Name": "Break for boss reset",
+  "Events": [
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 1000
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 1050
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 1300
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 1350
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 11600
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 11650
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 11900
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 11950
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 22200
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 22250
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 22500
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 22550
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 32800
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 32850
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 33100
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 33150
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 43400
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 43450
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 43700
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 43750
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 54000
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 54050
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 54300
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 54350
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 64600
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 64650
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 64900
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 64950
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 75200
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 75250
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 75500
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 75550
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 85800
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 85850
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyDown",
+      "Timestamp": 86100
+    },
+    {
+      "KeyName": "2",
+      "EventType": "KeyUp",
+      "Timestamp": 86150
+    },
+    {
+      "KeyName": "B",
+      "EventType": "KeyDown",
+      "Timestamp": 96000
+    },
+    {
+      "KeyName": "B",
+      "EventType": "KeyUp",
+      "Timestamp": 96050
+    }
+  ],
+  "LoopType": "TillLoopNumber",
+  "LoopNumber": 1,
+  "LoopTime": 0,
+  "LoopInterval": 0,
+  "Acceleration": "1.0",
+  "PlayOnStart": false,
+  "DonotShowWindowOnFinish": false,
+  "RestartPlayer": false,
+  "RestartPlayerAfterMinutes": 60,
+  "ShortCut": "",
+  "UserName": "",
+  "MacroId": ""
+}

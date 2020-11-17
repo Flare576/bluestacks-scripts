@@ -1,21 +1,42 @@
 # Tap Titans 2 Macro Generator
 
+
+_** WARNING **_
 _**RUNNING A MACRO CAN BE DANGEROUS**_
 
-This macro does not intentionally deal with the store tab, but crazy shit happens.
+These macros do not intentionally deal with the store tab, but crazy shit happens.
 
-This macro ACTIVELY AVOIDS tapping on equipment (which can cause a "Buy Set" button to appear, costing you gems), but __CRAZY SHIT HAPPENS__.
+These macros ACTIVELY AVOID tapping on equipment and the "Buy Set" button, but __CRAZY SHIT HAPPENS__.
+
+# How-to
+
+Because of the 30min restriction on BlueStacks macros, I've split the Clan Ship/Fairy macros into pieces. The idea is
+that you'd import all of them into Blue Stacks, then use the "Merge" button in the macro interface. In here, you'd add
+the macros to the list like this:
+
+1. Initialize
+1. Attack Loop (5-10 loops, or until progress usually slows without upgrading)
+1. Max Deadly Strike
+1. Attack Loop (1-3 loops, basically cheap filler just to help the mana strain)
+1. Max War Cry
+1. Attack Loop (2-5 loops, until progress usually slows or stops)
+1. Prestige
+1. Optional: BoS Max Upgrade
+
+Then start the resulting merged-macro after a prestige.
+
+# Pieces and Assumptions
+
+`tt2_generator.js` is a NodeJS tool that exports 7 "Standard" Macros and 9 "Raid" Macros. Details below.
 
 This script assumes several things:
 1. You have BlueStacks installed and setup (Tutorial coming later)
 1. You're running a Clan Ship + Fairy build
-1. You've somehow do not have to watch ads for Fairy drops
+1. You have MAXed out Fairy Charm
 1. You have 5 Daggers
-1. DS and WC both have ~2min duration
+1. You've somehow do not have to watch ads for Fairy drops (event pass, lifetime ad-free, VIP, etc.)
 
 ## Initialize
-
-Should be run immediately after a prestige. It will:
 
 - Ensure your panels are set to full height
 - Ensure your heroes are set to max buy
@@ -23,59 +44,69 @@ Should be run immediately after a prestige. It will:
 - Upgrade your Sword Master to unlock your skills
 - Buy the four skills relevant to Clan Ship (DS, HoM, WC, SC)
 - Open your Heroes panel
-- Scroll to the top and buy a page of heroes (if possible)
-- Go absolutely nutso (60 seconds)
+- 60 seconds of Attack Loop (See below)
 - Open your Heroes panel
 - Scroll to the second "Page" of heroes, buy, scroll up, buy again
 
-## Absolutely Nutso mode
-
-During initialization and for about 20 minutes after, the macro will run "Manic" mode. This means it will loop through:
+## Attack Loop
 
 1. Activate all skills
 1. Tap Crewmate
 1. Tap Pet
 1. Tap every\* potential spawn/jump point of Astral Awakening twice
-1. Tap all 5 dagger locations
+1. Tap a dagger, activate skills, repeat for each dagger
+1. Run "Ensure Closed" process
 
-It'll basically look like your screen is exploding for about 55s, then it will open the Hero panel, activate/upgrae your heroes, and do it again.
+> \*Every potential spawn of Astral Awakening.... EXCEPT those near the equipment drop. The ones around the "Buy Set"
+> button are actually safely clickable - just needed to get creative
 
-This will last around 20 minutes, at which point...
+The loop will run for nearly 2 minutes, and finish with 1 page of hero activation/upgrades.
 
-## Mid-game mode
+> To help mitigate lock ups due to the frequent level transition, the macro will:
+> 1. Tap the Hero panel twice quickly
+> 1. Tap the Hero panel once normally
+> 1. Tap the pet panel twice normally
+> 1. Tap where the fairy's "Continue" button is
+>
+> These taps should force any open windows/messages to close, flip to the Hero panel from whatever panel was showing,
+> then open/close the Pet panel. So, if you see panels opening/closing.... you know why
 
-To transition to midgame mode, the macro will
+## Max DS & Max WC
 
-1. Open your Character panel
-1. Upgrade your sword master (why not)
-1. Cancel DS (if running), and then upgrade and max it out
+Will bring Deadly Strike/War Cry as high as it can go by:
 
-Afterward, it will do a more controlled loop, where:
-1. Activate HoM, WC, and SC
-1. Alternate between tapping the line the fairies travel and the "Continue" button location
-1. Activate DS if the fairies didn't
-1. Open your Hero panel/activate/upgrade
-1. For 60 seconds
-  1. Activate HoM, WC, SC
-  1. Tap Crewmate
-  1. Tap Pet
-  1. Tap every\* potential spawn/jump point of Astral Awakening twice
-  1. Tap all 5 dagger locations (with a 1s delay between each)
-1. Open your Hero panel/activate/upgrade
-1. For 45 seconds
-  1. Activate HoM, WC, SC
-  1. Tap Crewmate
-  1. Tap Pet
-  1. Tap SAFE potential spawn/jump point of Astral Awakening twice
-  1. Tap all 5 dagger locations (with a 1s delay between each)
+1. Opening Hero panel
+1. Level up Hero (or he/she will be sad)
+1. Tap the main level-up button for skill (might upgrade, more likely it will cancel the currently activated skill)
+1. Tap the main level-up button again (definitely upgrade)
+1. Tap the blue Max button to the left.
+1. Run "Ensure Closed" process
 
-After 3 rounds, the macro waits for 90s. This is to allow for it failing to kill a boss in time and ending up out of battle. It will then tap the location of "Enter Battle" and start the final round...
+## Break for Boss
 
-> SAFE is defined as any points BELOW the fairy line
+Considering removing this as I haven't "missed" a boss kill with this new method, but saving it for now. Just chills for 90s.
 
-## Late-game Mode
+## Prestige
 
-I know you were hoping for exciting stuff, but it's the same as mid-game, except we max out WC and only keep HoM and SC up during the loop ¯\_(ツ)_/¯
+Surprisingly, this is currently the macro that is the most likely to fail on you; the second and third prestige buttons
+seem to shift up/down based on the content of the windows. I haven't gotten the layout quite right yet 100% of the time,
+so let me know if it fails on you.
 
+1. Open Hero panel
+1. Tap Prestige button
+1. Wait a few seconds
+1. Tap Prestige button on pop-up
+1. Wait a few seconds (slow and steady, folks....)
+1. Tap the last Prestige button
+1. Wait ~10 seconds
+1. Tap where the "Max Equipment Drops" warning might show up
 
-* \*Every potential spawn of Astral Awakening.... EXCEPT those near the equipment drop!
+## BoS Max Upgrade
+
+WARNING: Macros can't see. If you recently unlocked a new artifact and it's still at the top of the list, this macro
+WILL UPGRADE THAT INSTEAD. Probably not what you want; so restart the game or prestige without this macro then restart
+
+1. Open the Artifact panel
+1. Tap the top-most artifact (directly under the "Discover" button) 6 times.
+1. Close the panel
+1. Run "Ensure Closed" process

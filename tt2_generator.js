@@ -317,14 +317,7 @@ function tapNineButtons(reversed) {
     });
 }
 
-// mode: manic, normal, safe
-// manic: Keep all skills up, tap all astral
-// normal: Keep cheap skills up, tap all astral
-// safe: Keep cheap skills up, skip unsafe astral
-function tapFor(time, mode, skills = ['HoM', 'SC']) {
-    mode === 'manic' && skills.push('DS', 'WC');
-    const daggerDuration = mode === 'manic' ? HIT_DURATION : 1000;
-
+function tapFor(time, skills = ['DS', 'HoM', 'WC', 'SC']) {
     const startWait = next;
     while ( next - startWait < time ) {
         // Desired skills
@@ -334,9 +327,7 @@ function tapFor(time, mode, skills = ['HoM', 'SC']) {
         // Astral Awakening
         for (let i = 0; i < 2; i++) {
             astralLocations.forEach(({ X, Y }) => {
-                if ( Y > 35 || mode !== 'safe' ) {
-                    generateOneClick({ X, Y, duration: HIT_DURATION });
-                }
+                generateOneClick({ X, Y, duration: HIT_DURATION });
             });
             // Twice just to be sure; the above taps go FAST
             clickContinue();
@@ -344,20 +335,15 @@ function tapFor(time, mode, skills = ['HoM', 'SC']) {
         }
         // Daggers
         activateSkills(skills);
-        generateOneClick({ X: 34.66, Y: 40.13, duration: daggerDuration });
+        generateOneClick({ X: 34.66, Y: 40.13, duration: HIT_DURATION });
         activateSkills(skills);
-        generateOneClick({ X: 42.08, Y: 40.13, duration: daggerDuration });
+        generateOneClick({ X: 42.08, Y: 40.13, duration: HIT_DURATION });
         activateSkills(skills);
-        generateOneClick({ X: 49.64, Y: 40.77, duration: daggerDuration });
+        generateOneClick({ X: 49.64, Y: 40.77, duration: HIT_DURATION });
         activateSkills(skills);
-        generateOneClick({ X: 57.35, Y: 39.89, duration: daggerDuration });
+        generateOneClick({ X: 57.35, Y: 39.89, duration: HIT_DURATION });
         activateSkills(skills);
-        generateOneClick({ X: 64.48, Y: 39.09, duration: daggerDuration });
-        //generateOneClick({ X: 34.66, Y: 40.13, duration: daggerDuration });
-        //generateOneClick({ X: 42.08, Y: 40.13, duration: daggerDuration });
-        //generateOneClick({ X: 49.64, Y: 40.77, duration: daggerDuration });
-        //generateOneClick({ X: 57.35, Y: 39.89, duration: daggerDuration });
-        //generateOneClick({ X: 64.48, Y: 39.09, duration: daggerDuration });
+        generateOneClick({ X: 64.48, Y: 39.09, duration: HIT_DURATION });
 
         // Pet
         generateOneClick({ X: 52.92, Y: 48.64, duration: HIT_DURATION });
@@ -399,54 +385,41 @@ function writeIt(name) {
     fs.writeFileSync(`${outputPath}/${name}.json`, JSON.stringify(action, null, 2));
 }
 
-// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
 // const outputPath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
-const outputPath = './macros';
+// const outputPath = './macros';
 
 [{
-    name: '1 Initialize Skills',
+    name: 'Initialize Skills',
     calls: [
         { fn: ensureEnlarged, },
         { fn: ensureHeroMaxBuy },
         { fn: increaseSkills },
-        { fn: tapFor, params: [60000, 'manic'] },
+        { fn: tapFor, params: [60000] },
         { fn: twoPagesOfHeroes },
     ],
 },{
-    name: '2 Early Loop (120s)',
+    name: 'Attack Loop (120s)',
     calls: [
-        {fn: tapFor, params: [115000, 'manic']},
+        {fn: tapFor, params: [115000]},
         {fn: onePageOfHeroes},
     ],
 },{
-    name: '3.1 Mid Transition [Max DS]',
+    name: 'Max DS',
     calls: [{fn: increaseSkills, params: [true, ['DS']]}],
 },{
-    name: '3.2 Mid Loop (120s)',
-    calls: [
-        { fn: onePageOfHeroes, params: [true] },
-        { fn: tapFor, params: [120000, 'normal', ['DS', 'HoM', 'WC', 'SC']]},
-    ],
+    name: 'Max WC',
+    calls: [{fn: increaseSkills, params: [true, ['WC']]}],
 },{
-    name: '4.1 Break for boss reset',
+    name: 'Break for boss reset',
     calls: [
-        { fn: increaseSkills, params: [false, ['DS']] },
         { fn: ensureNotWaitingForBoss }
     ],
 },{
-    name: '4.2 Late Transition [Max WC]',
-    calls: [{fn: increaseSkills, params: [true, ['WC']]}],
-},{
-    name: '4.3 Late Loop (120s)',
-    calls: [
-        { fn: onePageOfHeroes, params: [true] },
-        { fn: tapFor, params: [120000, 'normal', ['DS', 'HoM', 'WC', 'SC']]},
-    ],
-},{
-    name: '5.1 Prestige',
+    name: 'Prestige',
     calls: [{fn: prestige}],
 },{
-    name: '5.2 BoS Max Upgrade',
+    name: 'BoS Max Upgrade',
     calls: [{fn: bookOfShadows}],
 }].forEach(macro => {
     newAction(macro.name);
@@ -503,9 +476,9 @@ addEvent({X,Y, Delta: 0, EventType: 'MouseUp', duration });
 writeIt(name);
 
 // Testing
-name = '5. Test'
+name = 'Test'
 newAction(name);
 for (let i = 0; i < 510; i++) {
     generateOneClick( {X: 48.71, Y: 36.11, duration: HIT_DURATION});
 }
-writeIt(name);
+// writeIt(name);

@@ -1,6 +1,6 @@
 {
-  "TimeCreated": "20201117T012634",
-  "Name": "4.1 Break for boss reset",
+  "TimeCreated": "20201117T024124",
+  "Name": "Max WC",
   "Events": [
     {
       "KeyName": "1",
@@ -581,283 +581,121 @@
     },
     {
       "X": 93.55,
-      "Y": 48.33,
+      "Y": 75.33,
       "Delta": 0,
       "EventType": "MouseDown",
       "Timestamp": 4106
     },
     {
       "X": 93.55,
-      "Y": 48.33,
+      "Y": 75.33,
       "Delta": 0,
       "EventType": "MouseUp",
       "Timestamp": 4156
     },
     {
-      "X": 1.82,
-      "Y": 98.91,
+      "X": 93.55,
+      "Y": 75.33,
       "Delta": 0,
       "EventType": "MouseDown",
       "Timestamp": 4406
     },
     {
-      "X": 1.82,
-      "Y": 98.91,
+      "X": 93.55,
+      "Y": 75.33,
       "Delta": 0,
       "EventType": "MouseUp",
       "Timestamp": 4456
     },
     {
+      "X": 58.93,
+      "Y": 75.33,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 4706
+    },
+    {
+      "X": 58.93,
+      "Y": 75.33,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 4756
+    },
+    {
       "X": 1.82,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseDown",
-      "Timestamp": 4476
+      "Timestamp": 5006
     },
     {
       "X": 1.82,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseUp",
-      "Timestamp": 4526
+      "Timestamp": 5056
     },
     {
       "X": 1.82,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseDown",
-      "Timestamp": 4546
+      "Timestamp": 5076
     },
     {
       "X": 1.82,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseUp",
-      "Timestamp": 4596
+      "Timestamp": 5126
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 5146
+    },
+    {
+      "X": 1.82,
+      "Y": 98.91,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 5196
     },
     {
       "KeyName": "4",
       "EventType": "KeyDown",
-      "Timestamp": 4846
+      "Timestamp": 5446
     },
     {
       "KeyName": "4",
       "EventType": "KeyUp",
-      "Timestamp": 4896
+      "Timestamp": 5496
     },
     {
       "KeyName": "4",
       "EventType": "KeyDown",
-      "Timestamp": 5896
+      "Timestamp": 6496
     },
     {
       "KeyName": "4",
       "EventType": "KeyUp",
-      "Timestamp": 5946
+      "Timestamp": 6546
     },
     {
       "X": 71.11,
       "Y": 73.11,
       "Delta": 0,
       "EventType": "MouseDown",
-      "Timestamp": 6946
+      "Timestamp": 7546
     },
     {
       "X": 71.11,
       "Y": 73.11,
       "Delta": 0,
       "EventType": "MouseUp",
-      "Timestamp": 6996
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 7036
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 7086
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 7336
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 7386
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 17636
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 17686
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 17936
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 17986
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 28236
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 28286
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 28536
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 28586
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 38836
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 38886
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 39136
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 39186
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 49436
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 49486
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 49736
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 49786
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 60036
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 60086
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 60336
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 60386
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 70636
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 70686
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 70936
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 70986
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 81236
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 81286
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 81536
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 81586
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 91836
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 91886
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyDown",
-      "Timestamp": 92136
-    },
-    {
-      "KeyName": "2",
-      "EventType": "KeyUp",
-      "Timestamp": 92186
-    },
-    {
-      "KeyName": "B",
-      "EventType": "KeyDown",
-      "Timestamp": 102036
-    },
-    {
-      "KeyName": "B",
-      "EventType": "KeyUp",
-      "Timestamp": 102086
+      "Timestamp": 7596
     }
   ],
   "LoopType": "TillLoopNumber",

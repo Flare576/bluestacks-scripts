@@ -1,5 +1,5 @@
 {
-  "TimeCreated": "20201117T024124",
+  "TimeCreated": "20201123T015523",
   "Name": "Max WC",
   "Events": [
     {
@@ -674,28 +674,42 @@
       "Timestamp": 5496
     },
     {
+      "X": 76.67,
+      "Y": 88.11,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 6496
+    },
+    {
+      "X": 76.67,
+      "Y": 88.11,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 6546
+    },
+    {
       "KeyName": "4",
       "EventType": "KeyDown",
-      "Timestamp": 6496
+      "Timestamp": 6566
     },
     {
       "KeyName": "4",
       "EventType": "KeyUp",
-      "Timestamp": 6546
+      "Timestamp": 6616
     },
     {
       "X": 71.11,
       "Y": 73.11,
       "Delta": 0,
       "EventType": "MouseDown",
-      "Timestamp": 7546
+      "Timestamp": 7616
     },
     {
       "X": 71.11,
       "Y": 73.11,
       "Delta": 0,
       "EventType": "MouseUp",
-      "Timestamp": 7596
+      "Timestamp": 7666
     }
   ],
   "LoopType": "TillLoopNumber",

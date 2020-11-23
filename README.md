@@ -31,45 +31,60 @@ Then start the resulting merged-macro after a prestige.
 
 This script assumes several things:
 1. You have BlueStacks installed and setup (Tutorial coming later)
-1. You're running a Clan Ship + Fairy build
+1. You're running a Clan Ship build
 1. You have MAXed out Fairy Charm
 1. You have 5 Daggers
 1. You've somehow do not have to watch ads for Fairy drops (event pass, lifetime ad-free, VIP, etc.)
+1. You have Artifact upgrade set to percentage
 
 ## Initialize
 
+This script will automatically:
+
 - Ensure your panels are set to full height
 - Ensure your heroes are set to max buy
+- Ensure your pets page is scrolled to the bottom
 - Open your character panel
 - Upgrade your Sword Master to unlock your skills
 - Buy the four skills relevant to Clan Ship (DS, HoM, WC, SC)
-- Open your Heroes panel
 - 60 seconds of Attack Loop (See below)
 - Open your Heroes panel
 - Scroll to the second "Page" of heroes, buy, scroll up, buy again
 
 ## Attack Loop
 
+This is the most complicated script in the bunch. The goal is two-fold:
+
+1. Utilize Daggers, Ancestral Awakening, Clan Ship Crewmate, all appropriate Sword Master skills, and Heart of Midas
+1. Mitigate script lockups due to level transition/fairy drops/bad coding
+
+Neither of these is straight-forward, but the attacks are easier to explain:
+
+For every dagger:
 1. Activate all skills
+1. Tap every\* potential spawn/jump point of Astral Awakening
+1. Tap a dagger
 1. Tap Crewmate
-1. Tap Pet
-1. Tap every\* potential spawn/jump point of Astral Awakening twice
-1. Tap a dagger, activate skills, repeat for each dagger
-1. Run "Ensure Closed" process
+
+This cycle lasts ~20 seconds and is followed by a tap on your pet (for HeoM) and then the "Ensure Closed" macro. With 5 iterations, you're highly likely to use most of the daggers before their expiration and with enough time between them to use the minimum per titan, and also likely to hit the Astral Awakening trigger to its full advantage. This method also keeps your crewmate and skills up as much as possible.
 
 > \*Every potential spawn of Astral Awakening.... EXCEPT those near the equipment drop. The ones around the "Buy Set"
 > button are actually safely clickable - just needed to get creative
 
-The loop will run for nearly 2 minutes, and finish with 1 page of hero activation/upgrades.
+### Ensure Closed
 
-> To help mitigate lock ups due to the frequent level transition, the macro will:
-> 1. Tap the Hero panel twice quickly
-> 1. Tap the Hero panel once normally
-> 1. Tap the pet panel twice normally
-> 1. Tap where the fairy's "Continue" button is
->
-> These taps should force any open windows/messages to close, flip to the Hero panel from whatever panel was showing,
-> then open/close the Pet panel. So, if you see panels opening/closing.... you know why
+Attempt to ensure that all panels, messages, information boxes, etc. are closed. Originally, the script attempted to minimize all panel interactions, hoping to avoid the screen transition. It turns out that doesn't work, so this attempts the opposite: accept that the screen transition is going to happen at the worst time every time, and try to recover quickly afterward.
+
+This is accomplished by:
+
+1. Tap the Hero panel twice quickly
+1. Tap the Hero panel once normally
+1. Tap the pet panel to open it
+1. Tap the bottom-right-most pet
+1. Tap the pet panel to close it
+1. Tap where the fairy's "Continue" button is
+
+The first two taps are to close out informational boxes that may have been opened while the macro ran with a panel open. The third is to ensure either no panels are open, or the Hero panel is open, and the fourth is to swap to a known, safe panel. Selecting the bottom-right pet is just to maximize pet damage in case it got swapped, then close the pet panel. There's a chance that we missed a fairy continue button and all of the previous taps were useless; sheepishly tap the Continue button.
 
 ## Max DS & Max WC
 
@@ -88,9 +103,7 @@ Considering removing this as I haven't "missed" a boss kill with this new method
 
 ## Prestige
 
-Surprisingly, this is currently the macro that is the most likely to fail on you; the second and third prestige buttons
-seem to shift up/down based on the content of the windows. I haven't gotten the layout quite right yet 100% of the time,
-so let me know if it fails on you.
+Surprisingly, this is currently the macro that is the most likely to fail on you; the second and third prestige buttons seem to shift up/down based on the content of the windows. I haven't gotten the layout quite right yet 100% of the time, so let me know if it fails on you.
 
 1. Open Hero panel
 1. Tap Prestige button
@@ -103,10 +116,15 @@ so let me know if it fails on you.
 
 ## BoS Max Upgrade
 
-WARNING: Macros can't see. If you recently unlocked a new artifact and it's still at the top of the list, this macro
-WILL UPGRADE THAT INSTEAD. Probably not what you want; so restart the game or prestige without this macro then restart
+**WARNING**: *Macros can't see!!* If you recently unlocked a new artifact and it's still at the top of the list, this macro WILL UPGRADE THAT INSTEAD. Probably not what you want; so restart the game or prestige without this macro then restart
 
 1. Open the Artifact panel
-1. Tap the top-most artifact (directly under the "Discover" button) 6 times.
+1. Select MAX from the quantity selection
+1. Tap the top-most artifact (directly under the "Discover" button) 7 times.
+1. Select lowest option in quantity selection (because I've wasted enough relics forgetting to change this back)
 1. Close the panel
 1. Run "Ensure Closed" process
+
+## Titan Macros
+
+All of these are straight-forward: Tap and hold the part in question and squiggle around for 32-ish seconds. Each squiggle is a randomly generated distance from the "center point" (as determined with Totem of Power), so you should get 600 taps.

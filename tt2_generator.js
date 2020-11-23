@@ -19,66 +19,15 @@ MouseDown and first MouseMove must NOT have same values on a drag
 66.4, 53.69    87.02,54.57
 */
 const fs = require('fs');
-const allSkills = {
-    activate: {
-        HS: 8.09,
-        DS: 25.01,
-        HoM: 41.47,
-        FS: 58.09,
-        WC: 75.01,
-        SC: 91.32,
-        Y: 89.55,
-    },
-    levelUp: {
-        HS: 39.33,
-        DS: 48.33,
-        HoM: 57.33,
-        FS: 66.33,
-        WC: 75.33,
-        SC: 84.35,
-        oneX: 93.55,
-        maxX: 58.93,
-    },
-};
-const astralLocations = [
-    { X: 3.69, Y: 23.19 },
-    { X: 12.41, Y: 22.91 },
-    { X: 24.29, Y: 20.08 },
-    { X: 22.11, Y: 24.88 },
-    { X: 16.08, Y: 28.09 },
-    { X: 10.55, Y: 28.18 },
-    { X: 2.18, Y: 27.62 },
-    { X: 1.17, Y: 33.93 },
-    { X: 7.71, Y: 38.36 },
-    { X: 11.73, Y: 35.06 },
-    { X: 15.91, Y: 37.42 },
-    { X: 20.11, Y: 39.4 },
-    { X: 26.63, Y: 48.92 },
-    { X: 20.61, Y: 47.5 },
-    { X: 14.74, Y: 48.73 },
-    { X: 10.72, Y: 46.47 },
-    { X: 4.36, Y: 47.13 },
-    { X: 86.77, Y: 12.44 },
-    { X: 79.73, Y: 17.34 },
-    { X: 95.14, Y: 15.93 },
-    { X: 96.31, Y: 18.28 },
-    { X: 93.31, Y: 21.02 },
-    { X: 86.93, Y: 21.21 },
-    { X: 78.39, Y: 23.19 },
-    { X: 78.22, Y: 23.19 },
-    { X: 98.65, Y: 26.71 },
-    // { X: 91.46, Y: 26.58 }, // Under button 1
-    // { X: 86.93, Y: 28.09 }, // Under button 1
-    { X: 82.58, Y: 27.24 },
-    { X: 96.98, Y: 35.91 },
-    { X: 87.94, Y: 38.08 },
-    { X: 84.25, Y: 36.48 },
-    { X: 96.15, Y: 46.65 },
-    // { X: 89.78, Y: 48.44 }, // Too close to loot
-    // { X: 82.91, Y: 49.29 }, // Too close to loot
-    // { X: 77.55, Y: 46.65 }, // Too close to loot
-    // { X: 71.36, Y: 49.48 }, // Too close to loot
-];
+const {
+    allSkills,
+    astralLocations,
+    heroUpgradeButtons,
+    daggers,
+    crewLocation,
+    petLocation,
+    titan,
+} = require('./locations');
 
 const UI_DURATION = 250;
 const WIN_DURATION = 1000;
@@ -184,12 +133,20 @@ function generateDrag ({ X: startX, Y: startY }, { X: endX, Y: endY }) {
     });
 }
 
+function ensureBottomOfPets() {
+    generateOneKey('4', WIN_DURATION);
+    pageDown(2);
+    ensureClosed();
+}
+
+
 function ensureClosed() {
     // Tap Hero panel
     generateOneClick({X: 1.82, Y: 98.91, duration: HIT_DURATION});
     generateOneClick({X: 1.82, Y: 98.91, duration: HIT_DURATION});
     generateOneClick({X: 1.82, Y: 98.91});
     generateOneKey('4', WIN_DURATION);
+    generateOneClick({X: 76.67, Y: 88.11, duration: HIT_DURATION});
     generateOneKey('4', WIN_DURATION);
     clickContinue();
 }
@@ -211,7 +168,6 @@ function twoPagesOfHeroes(reversed) {
     ensureClosed();
 }
 
-// skills: see "allSkills" above
 function increaseSkills (max = false, skills = ['DS', 'HoM', 'WC', 'SC']) {
     const { levelUp } = allSkills;
     generateOneKey('1');
@@ -229,7 +185,6 @@ function increaseSkills (max = false, skills = ['DS', 'HoM', 'WC', 'SC']) {
     });
     ensureClosed();
 }
-
 
 function clickContinue () {
     generateOneClick({ X: 71.11, Y: 73.11, duration: HIT_DURATION * 2});
@@ -277,7 +232,7 @@ function ensureHeroMaxBuy() {
     generateOneKey('2', WIN_DURATION);
     generateOneClick({ X: 84.31, Y: 8.43 });
     generateOneClick({ X: 9.84, Y: 8.51 });
-    generateOneKey('2', WIN_DURATION);
+    ensureClosed();
 }
 
 // Only way I know how to do this is to wait for potential boss timer to expire
@@ -287,29 +242,7 @@ function ensureNotWaitingForBoss() {
 }
 
 function tapNineButtons(reversed) {
-    // we actually tap 18 times, juuuust in case
-    // the screen is off a bit
-    const X = 93.38;
-    // X: 69 -> 98.24
-    let points = [
-        {X, Y: 87.65},
-        {X, Y: 83.15},
-        {X, Y: 78.65},
-        {X, Y: 74.15},
-        {X, Y: 69.65},
-        {X, Y: 65.15},
-        {X, Y: 60.65},
-        {X, Y: 56.15},
-        {X, Y: 51.65},
-        {X, Y: 47.15},
-        {X, Y: 42.65},
-        {X, Y: 38.15},
-        {X:X-20, Y: 33.65},
-        {X:X-20, Y: 29.15},
-        {X:X-20, Y: 24.65},
-        {X, Y: 20.15},
-        {X, Y: 15.65},
-    ];
+    let points = [...heroUpgradeButtons];
     reversed && points.reverse();
 
     points.forEach(({X, Y}) => {
@@ -317,36 +250,36 @@ function tapNineButtons(reversed) {
     });
 }
 
+// Astral Awakening
+function tapAstrals () {
+    astralLocations.forEach(({ X, Y }) => {
+        generateOneClick({ X, Y, duration: HIT_DURATION });
+    });
+    clickContinue();
+}
+
+function tapDagger (pos) {
+    generateOneClick({...daggers[pos], duration: HIT_DURATION });
+}
+
+function tapCrew () {
+    generateOneClick({...crewLocation, duration: HIT_DURATION });
+}
+
+function tapPet () {
+    generateOneClick({...petLocation, duration: HIT_DURATION });
+}
+
 function tapFor(time, skills = ['DS', 'HoM', 'WC', 'SC']) {
     const startWait = next;
     while ( next - startWait < time ) {
-        // Desired skills
-        activateSkills(skills);
-        // Crew
-        generateOneClick({ X: 36.59, Y: 49.63, duration: HIT_DURATION });
-        // Astral Awakening
-        for (let i = 0; i < 2; i++) {
-            astralLocations.forEach(({ X, Y }) => {
-                generateOneClick({ X, Y, duration: HIT_DURATION });
-            });
-            // Twice just to be sure; the above taps go FAST
-            clickContinue();
-            clickContinue();
+        tapPet();
+        for ( let i = 0; i < daggers.length; i++) {
+            activateSkills(skills);
+            tapAstrals();
+            tapDagger(i);
+            tapCrew();
         }
-        // Daggers
-        activateSkills(skills);
-        generateOneClick({ X: 34.66, Y: 40.13, duration: HIT_DURATION });
-        activateSkills(skills);
-        generateOneClick({ X: 42.08, Y: 40.13, duration: HIT_DURATION });
-        activateSkills(skills);
-        generateOneClick({ X: 49.64, Y: 40.77, duration: HIT_DURATION });
-        activateSkills(skills);
-        generateOneClick({ X: 57.35, Y: 39.89, duration: HIT_DURATION });
-        activateSkills(skills);
-        generateOneClick({ X: 64.48, Y: 39.09, duration: HIT_DURATION });
-
-        // Pet
-        generateOneClick({ X: 52.92, Y: 48.64, duration: HIT_DURATION });
 
         // Stupid map transition...
         ensureClosed();
@@ -373,9 +306,15 @@ function prestige () {
 
 function bookOfShadows () {
     generateOneKey('5', WIN_DURATION);
-    for ( let i = 0; i < 6; i++) {
+    // Ensure MAX is selected
+    generateOneClick({ X: 84.31, Y: 8.43, duration: WIN_DURATION });
+    generateOneClick({ X: 9.84, Y: 8.51, duration: WIN_DURATION });
+    for ( let i = 0; i < 7; i++) {
         generateOneClick({ X: 84.26, Y: 28.71 });
     }
+    // Reset to lowest to avoid screwing self over
+    generateOneClick({ X: 84.31, Y: 8.43, duration: WIN_DURATION });
+    generateOneClick({ X: 60.04, Y: 8.51, duration: WIN_DURATION });
     ensureClosed();
 }
 
@@ -385,15 +324,16 @@ function writeIt(name) {
     fs.writeFileSync(`${outputPath}/${name}.json`, JSON.stringify(action, null, 2));
 }
 
-const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
+// const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
 // const outputPath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
-// const outputPath = './macros';
+const outputPath = './macros';
 
 [{
     name: 'Initialize Skills',
     calls: [
         { fn: ensureEnlarged, },
         { fn: ensureHeroMaxBuy },
+        { fn: ensureBottomOfPets },
         { fn: increaseSkills },
         { fn: tapFor, params: [60000] },
         { fn: twoPagesOfHeroes },
@@ -427,17 +367,6 @@ const outputPath = '/mnt/c/Users/Flare576/Documents/TT2_Macros';
     writeIt(macro.name);
 });
 
-// Raids
-const titan = {
-    'Left Arm': {X: 13.31, Y: 37.79},
-    'Head': {X: 50.75, Y: 34.51},
-    'Right Arm': {X: 82.09, Y: 38.17},
-    'Left Hand': {X: 13.16, Y: 58.93},
-    'Body': {X: 48.17, Y: 47.79},
-    'Right Hand': {X: 86.43, Y: 57.18},
-    'Left Leg': {X: 31.48, Y: 75.88},
-    'Right Leg': {X: 64.59, Y: 75.57},
-};
 const parts = Object.keys(titan);
 
 function titanMoves (X, Y, count, duration) {
@@ -469,7 +398,7 @@ addEvent({ X, Y, Delta: 0, EventType: 'MouseDown', duration });
 for (let i = 0; i < 8; i++) {
     parts.forEach(key => {
         const {X, Y} = titan[key];
-        titanMoves(X, Y, 35, duration);
+        titanMoves(X, Y, 38, duration);
     });
 }
 addEvent({X,Y, Delta: 0, EventType: 'MouseUp', duration });

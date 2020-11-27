@@ -1,5 +1,5 @@
 {
-  "TimeCreated": "20201123T015523",
+  "TimeCreated": "20201127T203302",
   "Name": "Max DS",
   "Events": [
     {
@@ -622,42 +622,42 @@
       "Timestamp": 4756
     },
     {
-      "X": 1.82,
+      "X": 25.19,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseDown",
       "Timestamp": 5006
     },
     {
-      "X": 1.82,
+      "X": 25.19,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseUp",
       "Timestamp": 5056
     },
     {
-      "X": 1.82,
+      "X": 25.19,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseDown",
       "Timestamp": 5076
     },
     {
-      "X": 1.82,
+      "X": 25.19,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseUp",
       "Timestamp": 5126
     },
     {
-      "X": 1.82,
+      "X": 25.19,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseDown",
       "Timestamp": 5146
     },
     {
-      "X": 1.82,
+      "X": 25.19,
       "Y": 98.91,
       "Delta": 0,
       "EventType": "MouseUp",
@@ -710,6 +710,20 @@
       "Delta": 0,
       "EventType": "MouseUp",
       "Timestamp": 7666
+    },
+    {
+      "X": 71.11,
+      "Y": 73.11,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 7916
+    },
+    {
+      "X": 71.11,
+      "Y": 73.11,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 7966
     }
   ],
   "LoopType": "TillLoopNumber",

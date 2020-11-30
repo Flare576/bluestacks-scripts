@@ -10,34 +10,36 @@ These macros ACTIVELY AVOID tapping on equipment and the "Buy Set" button, but _
 
 # How-to
 
-Because of the 30min restriction on BlueStacks macros, I've split the Clan Ship/Fairy macros into pieces. The idea is
-that you'd import all of them into Blue Stacks, then use the "Merge" button in the macro interface. In here, you'd add
-the macros to the list like this:
+The "Builds" macros are designed to be modular; I can't predict what your runs look like exactly, but I can predict the
+pieces you'll need. The idea isthat you'd import all of them into Blue Stacks, then use the "Merge" button in the macro
+interface. In here, you'd add the macros to the list like this:
 
-1. Initialize
-1. Attack Loop (5-10 loops, or until progress usually slows without upgrading)
-1. Max Deadly Strike
-1. Attack Loop (1-3 loops, basically cheap filler just to help the mana strain)
-1. Max War Cry
-1. Attack Loop (2-5 loops, until progress usually slows or stops)
-1. Prestige
-1. Optional: BoS Max Upgrade
+## Clan Ship / Shadow Clone
+1. `CS/SC - Initialize Skills`
+1. `CS/SC - Attack Loop (120s)` (5-10 loops, or until progress usually slows without upgrading)
+1. `CS/SC - Attack Loop (60s)` (5-10 loops, when frequent hero upgrades are required for progress)
+1. `CS/SC - Max Skills` (or `CS - Max Skills` if using Clan Ship)
+1. `CS/SC - Attack Loop (60s)` (5-20 loops, Until progres stops)
+1. `Prestige`
+1. Optional: `BoS Max Upgrade`
 
-Then start the resulting merged-macro after a prestige.
+> Note: I haven't made the parts for Heavenly Strike build yet; I'm looking forward to getting to the point where using
+those builds makes sense!
 
 # Pieces and Assumptions
 
-`tt2_generator.js` is a NodeJS tool that exports 7 "Standard" Macros and 9 "Raid" Macros. Details below.
+`tt2_generator.js` is a NodeJS tool that exports sets of macros for different builds/uses. It generates folders under
+`macros` for each of the macro types.
 
-This script assumes several things:
+The `builds` macros assume:
 1. You have BlueStacks installed and setup (Tutorial coming later)
-1. You're running a Clan Ship build
+1. You're running a Clan Ship or Shadow Clone build
 1. You have MAXed out Fairy Charm
 1. You have 5 Daggers
 1. You've somehow do not have to watch ads for Fairy drops (event pass, lifetime ad-free, VIP, etc.)
 1. You have Artifact upgrade set to percentage
 
-## Initialize
+## CS/SC - Initialize Skills
 
 This script will automatically:
 
@@ -51,7 +53,7 @@ This script will automatically:
 - Open your Heroes panel
 - Scroll to the second "Page" of heroes, buy, scroll up, buy again
 
-## Attack Loop
+## CS/SC Attack Loops
 
 This is the most complicated script in the bunch. The goal is two-fold:
 
@@ -86,20 +88,22 @@ This is accomplished by:
 
 The first two taps are to close out informational boxes that may have been opened while the macro ran with a panel open. The third is to ensure either no panels are open, or the Hero panel is open, and the fourth is to swap to a known, safe panel. Selecting the bottom-right pet is just to maximize pet damage in case it got swapped, then close the pet panel. There's a chance that we missed a fairy continue button and all of the previous taps were useless; sheepishly tap the Continue button.
 
-## Max DS & Max WC
+## CS/SC - Max Skills
 
-Will bring Deadly Strike/War Cry as high as it can go by:
+`CS - Max Skills` will use Deadly Strike/War Cry.
+`SC - Max Skills` will use Deadly Strike/War Cry/Flame Sword/Shadow Clone/Hand of Midas.
 
-1. Opening Hero panel
+For each, the macro will:
+
+1. Open Hero panel
 1. Level up Hero (or he/she will be sad)
 1. Tap the main level-up button for skill (might upgrade, more likely it will cancel the currently activated skill)
 1. Tap the main level-up button again (definitely upgrade)
 1. Tap the blue Max button to the left.
 1. Run "Ensure Closed" process
+1. Run a 60s attack loop
 
-## Break for Boss
-
-Considering removing this as I haven't "missed" a boss kill with this new method, but saving it for now. Just chills for 90s.
+The hope is that, by attacking between each skill increase, we minimize mana shock.
 
 ## Prestige
 
@@ -125,6 +129,10 @@ Surprisingly, this is currently the macro that is the most likely to fail on you
 1. Close the panel
 1. Run "Ensure Closed" process
 
-## Titan Macros
+## Raid - Titan Macros
 
 All of these are straight-forward: Tap and hold the part in question and squiggle around for 32-ish seconds. Each squiggle is a randomly generated distance from the "center point" (as determined with Totem of Power), so you should get 600 taps.
+
+## Alt - Start an Alt Account
+
+I wouldn't recommend these just yet, but you can try 'em out if you create a new BlueStacks instance!

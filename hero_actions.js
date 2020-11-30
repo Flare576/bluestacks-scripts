@@ -24,6 +24,6 @@ exports.tapNineButtons = function (macro, reversed) {
     reversed && points.reverse();
 
     points.forEach(({X, Y}) => {
-        macro.addClick({ X, Y, duration: UI_DURATION / 2 });
+        macro.addClick({ X, Y }, UI_DURATION / 2);
     });
 }

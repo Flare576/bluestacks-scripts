@@ -31,8 +31,8 @@ module.exports = class Macro {
         // Sleeping for long durations seems like it might stop the macro.... limit to 10s
         let start = this.next;
         while (this.next - start < duration) {
-            this.generateOneKey('2');
-            this.generateOneKey('2');
+            this.addKey('2');
+            this.addKey('2');
             const passed = this.next - start;
             const left = Math.max(0, duration - (this.next - start))
             this.next += Math.min(10000, left);
@@ -44,7 +44,7 @@ module.exports = class Macro {
         this.addEvent({ KeyName, EventType: 'KeyUp', duration });
     }
 
-    addClick ({ duration = UI_DURATION, Delta = 0, ...rest }){
+    addClick ({ Delta = 0, ...rest }, duration = UI_DURATION){
         this.addEvent({ ...rest, Delta, EventType: 'MouseDown' });
         this.addEvent({ ...rest, Delta, EventType: 'MouseUp', duration });
     }

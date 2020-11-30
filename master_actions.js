@@ -1,4 +1,4 @@
-const { allSkills } = require('./locations');
+const { allSkills, masterLevel } = require('./locations');
 const { pageUp, ensureClosed } = require('./ui_controls');
 
 exports.increaseSkills = function (macro, max = false, skills = ['DS', 'HoM', 'FS', 'WC', 'SC']) {
@@ -6,7 +6,7 @@ exports.increaseSkills = function (macro, max = false, skills = ['DS', 'HoM', 'F
     macro.addKey('1');
     pageUp(macro);
     // Level up Sword Dude
-    macro.addClick({ X: 84.11, Y: 16.06 });
+    macro.addClick(masterLevel);
 
     skills.forEach(skill => {
         const Y = levelUp[skill];
@@ -34,13 +34,13 @@ exports.activateAllSkills = function (macro) {
 // TODO: this is still clunky
 exports.prestige = function (macro) {
     macro.addKey('1', 2000);
-    macro.addClick({ X: 83.24, Y: 28.89, duration: 2000});
-    macro.addClick({ X: 49.71, Y: 88.50, duration: 2000 });
-    macro.addClick({ X: 68.34, Y: 72.81, duration: 15000 });
-    // macro.addClick({ X: 49.71, Y: 91.01, duration: 2000 }); // Event 2nd buton
-    // macro.addClick({ X: 71.18, Y: 75.04, duration: 10000 }); // Event 3rd button
-    // macro.addClick({ X: 49.71, Y: 81.46, duration: 2000 }); // Normal 2nd buton
-    // macro.addClick({ X: 67.94, Y: 67.72, duration: 10000 }); // Normal 3rd button
+    macro.addClick({ X: 83.24, Y: 28.89 }, 2000);
+    macro.addClick({ X: 49.71, Y: 88.50 }, 2000);
+    macro.addClick({ X: 68.34, Y: 72.81 }, 15000);
+    // macro.addClick({ X: 49.71, Y: 91.01 }, 2000 ); // Event 2nd buton
+    // macro.addClick({ X: 71.18, Y: 75.04 }, 10000 ); // Event 3rd button
+    // macro.addClick({ X: 49.71, Y: 81.46 }, 2000 ); // Normal 2nd buton
+    // macro.addClick({ X: 67.94, Y: 67.72 }, 10000 ); // Normal 3rd button
     // Might see a warning about equipment; clicky!
     macro.addClick({ X: 50.88, Y: 65.81 });
 

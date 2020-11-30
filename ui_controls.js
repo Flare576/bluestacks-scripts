@@ -1,4 +1,15 @@
+const { buyBox, maxPurchase, minPurchase } = require('./locations');
 const { HIT_DURATION, WIN_DURATION } = require('./durations.js');
+
+exports.setMinBuy = function (macro) {
+    macro.addClick(buyBox, WIN_DURATION);
+    macro.addClick(minPurchase, WIN_DURATION);
+}
+
+exports.setMaxBuy = function (macro) {
+    macro.addClick(buyBox, WIN_DURATION);
+    macro.addClick(maxPurchase, WIN_DURATION);
+}
 
 exports.ensureBottomOfPets = function (macro) {
     macro.addKey('4', WIN_DURATION);
@@ -6,15 +17,15 @@ exports.ensureBottomOfPets = function (macro) {
     exports.ensureClosed(macro);
 }
 
-exports.ensureClosed = function (macro) {
+exports.ensureClosed = function (macro, clickFairy = true) {
     // Tap Hero panel
-    macro.addClick({X: 25.19, Y: 98.91, duration: HIT_DURATION});
-    macro.addClick({X: 25.19, Y: 98.91, duration: HIT_DURATION});
+    macro.addClick({X: 25.19, Y: 98.91}, HIT_DURATION);
+    macro.addClick({X: 25.19, Y: 98.91}, HIT_DURATION);
     macro.addClick({X: 25.19, Y: 98.91});
     macro.addKey('4', WIN_DURATION);
-    macro.addClick({X: 76.67, Y: 88.11, duration: HIT_DURATION});
+    macro.addClick({X: 76.67, Y: 88.11}, HIT_DURATION);
     macro.addKey('4', WIN_DURATION);
-    exports.clickContinue(macro);
+    clickFairy && exports.clickContinue(macro);
 }
 
 exports.clickContinue = function (macro) {

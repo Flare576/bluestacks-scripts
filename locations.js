@@ -110,6 +110,13 @@ exports.daggers = [
 exports.crewLocation = { X: 36.59, Y: 49.63 };
 exports.petLocation = { X: 52.92, Y: 48.64 };
 
+exports.fullScreenButton = { X: 80.71, Y: 54.42 };
+exports.buyBox = { X: 84.31, Y: 8.43 };
+exports.maxPurchase = { X: 9.84, Y: 8.51 };
+exports.minPurchase = { X: 60.04, Y: 8.51 };
+exports.drops = { X: 66.67, Y: 51.68 };
+exports.masterLevel = { X: 84.11, Y: 16.06 };
+
 // Raids
 exports.titan = {
     'Left Arm': {X: 13.31, Y: 37.79},

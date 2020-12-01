@@ -8,7 +8,7 @@ const { ensureEnlarged, ensureHeroMaxBuy, ensureBottomOfPets } = require('../uti
 
 module.exports = () => {
     [{
-        name: 'CS/SC - Initialize Skills',
+        name: 'CS&SC - Initialize Skills',
         calls: [
             { fn: ensureEnlarged, },
             { fn: ensureHeroMaxBuy },
@@ -18,13 +18,13 @@ module.exports = () => {
             { fn: twoPagesOfHeroes },
         ],
     },{
-        name: 'CS/SC - Attack Loop (60s)',
+        name: 'CS&SC - (60s) Attack Loop',
         calls: [
             {fn: tapFor, params: [45000]},
             {fn: onePageOfHeroes},
         ],
     },{
-        name: 'CS/SC - Attack Loop (120s)',
+        name: 'CS&SC - (120s) Attack Loop',
         calls: [
             {fn: tapFor, params: [115000]},
             {fn: onePageOfHeroes},
@@ -35,16 +35,16 @@ module.exports = () => {
             {fn: increaseSkills, params: [true, ['DS']]},
             {fn: tapFor, params: [45000]},
             {fn: onePageOfHeroes},
-            {fn: increaseSkills, params: [true, ['HoM']]},
+            {fn: increaseSkills, params: [true, ['WC']]},
             {fn: tapFor, params: [45000]},
             {fn: onePageOfHeroes},
             {fn: increaseSkills, params: [true, ['FS']]},
             {fn: tapFor, params: [45000]},
             {fn: onePageOfHeroes},
-            {fn: increaseSkills, params: [true, ['WC']]},
+            {fn: increaseSkills, params: [true, ['SC']]},
             {fn: tapFor, params: [45000]},
             {fn: onePageOfHeroes},
-            {fn: increaseSkills, params: [true, ['SC']]},
+            {fn: increaseSkills, params: [true, ['HoM']]},
             {fn: tapFor, params: [45000]},
             {fn: onePageOfHeroes},
         ],

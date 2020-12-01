@@ -15,11 +15,11 @@ pieces you'll need. The idea isthat you'd import all of them into Blue Stacks, t
 interface. In here, you'd add the macros to the list like this:
 
 ## Clan Ship / Shadow Clone
-1. `CS/SC - Initialize Skills`
-1. `CS/SC - Attack Loop (120s)` (5-10 loops, or until progress usually slows without upgrading)
-1. `CS/SC - Attack Loop (60s)` (5-10 loops, when frequent hero upgrades are required for progress)
-1. `CS/SC - Max Skills` (or `CS - Max Skills` if using Clan Ship)
-1. `CS/SC - Attack Loop (60s)` (5-20 loops, Until progres stops)
+1. `CS&SC - Initialize Skills`
+1. `CS&SC - (120s) Attack Loop` (5-10 loops, or until progress usually slows without upgrading)
+1. `CS&SC - (60s) Attack Loop` (5-10 loops, when frequent hero upgrades are required for progress)
+1. `CS - Max Skills` (or `SC - Max Skills` if using Shadow Clone)
+1. `CS&SC - (60s) Attack Loop` (5-20 loops, Until progress stops)
 1. `Prestige`
 1. Optional: `BoS Max Upgrade`
 

@@ -5,14 +5,14 @@ const {
     petLocation,
 } = require('../data/locations');
 const { HIT_DURATION } = require('../data/durations');
-const { clickContinue, ensureClosed } = require('../utilities/ui_controls');
+const { clickCollect, ensureClosed } = require('../utilities/ui_controls');
 const { activateSkills } = require('../actions/master_actions');
 
 function tapAstrals (macro) {
     astralLocations.forEach(({ X, Y }) => {
         macro.addClick({X, Y}, HIT_DURATION);
     });
-    clickContinue(macro);
+    clickCollect(macro);
 }
 
 function tapDagger (macro, pos) {

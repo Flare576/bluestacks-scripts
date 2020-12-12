@@ -1,9 +1,9 @@
 const { UI_DURATION } = require('../data/durations');
 module.exports = class Macro {
-    constructor (Name) {
+    constructor (Name, mods = {}) {
         const TimeCreated = new Date().toISOString().replace(/[^\dT]/g, "").substring(0,15);
         this.next = 1000;
-        this.content = {
+        this.content = Object.assign({},{
             TimeCreated,
             Name,
             Events: [],
@@ -19,7 +19,7 @@ module.exports = class Macro {
             ShortCut: "",
             UserName: "",
             MacroId: "",
-        };
+        }, mods);
     }
 
     addEvent ({ duration = 50, ...rest }) {
@@ -44,12 +44,17 @@ module.exports = class Macro {
         this.addEvent({ KeyName, EventType: 'KeyUp', duration });
     }
 
-    addClick ({ Delta = 0, ...rest }, duration = UI_DURATION){
-        this.addEvent({ ...rest, Delta, EventType: 'MouseDown' });
-        this.addEvent({ ...rest, Delta, EventType: 'MouseUp', duration });
+    addClicks (locations, duration = UI_DURATION){
+        locations.forEach(loc => this.addClick(loc, duration));
     }
 
-    addDrag ({ X: startX, Y: startY }, { X: endX, Y: endY }) {
+    addClick (location, duration = UI_DURATION){
+        const Delta = 0;
+        this.addEvent({ ...location, Delta, EventType: 'MouseDown' });
+        this.addEvent({ ...location, Delta, EventType: 'MouseUp', duration });
+    }
+
+    addDrag ({ X: startX, Y: startY }, { X: endX, Y: endY }, duration = 6) {
         const Delta = 0;
         this.addEvent({
             X: startX,
@@ -74,7 +79,7 @@ module.exports = class Macro {
             const X = +(startX + (i * xFactor)).toFixed(2);
             const Y = +(startY + (i * yFactor)).toFixed(2);
             this.addEvent({
-                duration: 6,
+                duration,
                 X,
                 Y,
                 Delta,

@@ -1,9 +1,25 @@
-const { buyBox, maxPurchase, minPurchase } = require('../data/locations');
+const {
+    buyBox,
+    maxPurchase,
+    hundredPurchase,
+    minPurchase,
+    collect,
+    noThanks,
+    fightBoss,
+}
+=
+require('../data/locations');
 const { HIT_DURATION, WIN_DURATION } = require('../data/durations');
+const config = require('./config');
 
 exports.setMinBuy = function (macro) {
     macro.addClick(buyBox, WIN_DURATION);
     macro.addClick(minPurchase, WIN_DURATION);
+}
+
+exports.setHundredBuy = function (macro) {
+    macro.addClick(buyBox, WIN_DURATION);
+    macro.addClick(hundredPurchase, WIN_DURATION);
 }
 
 exports.setMaxBuy = function (macro) {
@@ -17,7 +33,9 @@ exports.ensureBottomOfPets = function (macro) {
     exports.ensureClosed(macro);
 }
 
-exports.ensureClosed = function (macro, clickFairy = true) {
+exports.ensureClosed = function (macro) {
+    const { useFairies } = config.get();
+
     // Tap Hero panel
     macro.addClick({X: 25.19, Y: 98.91}, HIT_DURATION);
     macro.addClick({X: 25.19, Y: 98.91}, HIT_DURATION);
@@ -25,12 +43,17 @@ exports.ensureClosed = function (macro, clickFairy = true) {
     macro.addKey('4', WIN_DURATION);
     macro.addClick({X: 76.67, Y: 88.11}, HIT_DURATION);
     macro.addKey('4', WIN_DURATION);
-    clickFairy && exports.clickContinue(macro);
+    useFairies ? exports.clickCollect(macro) : exports.clickNoThanks(macro);
 }
 
-exports.clickContinue = function (macro) {
-    macro.addClick({ X: 71.11, Y: 73.11 });
-    macro.addClick({ X: 71.11, Y: 73.11, duration: HIT_DURATION * 2});
+exports.clickCollect = function (macro) {
+    macro.addClick(collect);
+    macro.addClick(collect, HIT_DURATION * 2);
+}
+
+exports.clickNoThanks = function (macro) {
+    macro.addClick(noThanks);
+    macro.addClick(noThanks, HIT_DURATION * 2);
 }
 
 exports.pagePartialUp = function (macro, depth = 1) {
@@ -39,15 +62,15 @@ exports.pagePartialUp = function (macro, depth = 1) {
     }
 }
 
-exports.pageUp = function (macro, depth = 1) {
+exports.pageUp = function (macro, depth = 1, duration = 6) {
     for (let i = 0; i < depth; i++) {
-        macro.addDrag({X: 49.21, Y: 16.27}, {X: 49.21, Y: 93.88});
+        macro.addDrag({X: 49.21, Y: 23.08}, {X: 49.21, Y: 93.83});
     }
 }
 
-exports.pageDown = function (macro, depth = 1) {
+exports.pageDown = function (macro, depth = 1, duration = 6) {
     for (let i = 0; i < depth; i++) {
-        macro.addDrag({X: 49.21, Y: 93.88}, {X: 49.21, Y: 21.27});
+        macro.addDrag({X: 49.21, Y: 94.01}, {X: 49.21, Y: 21.51}, 20);
     }
 }
 
@@ -64,4 +87,8 @@ exports.ensureHeroMaxBuy = function (macro) {
     macro.addClick({ X: 84.31, Y: 8.43 });
     macro.addClick({ X: 9.84, Y: 8.51 });
     exports.ensureClosed(macro);
+}
+
+exports.joinLeaveBoss = function (macro) {
+    macro.addClick(fightBoss);
 }

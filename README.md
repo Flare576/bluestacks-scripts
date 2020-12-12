@@ -11,17 +11,18 @@ These macros ACTIVELY AVOID tapping on equipment and the "Buy Set" button, but _
 # How-to
 
 The "Builds" macros are designed to be modular; I can't predict what your runs look like exactly, but I can predict the
-pieces you'll need. The idea isthat you'd import all of them into Blue Stacks, then use the "Merge" button in the macro
-interface. In here, you'd add the macros to the list like this:
+pieces you'll need. The idea is that you'd find your build and fairy/no fairy in the [macros](macros) folder, import
+the files into BlueStacks, then use the "Merge" button in the macro interface. In here, you'd add the macros to the
+list like this:
 
-## Clan Ship / Shadow Clone
-1. `CS&SC - Initialize Skills`
-1. `CS&SC - (120s) Attack Loop` (5-10 loops, or until progress usually slows without upgrading)
-1. `CS&SC - (60s) Attack Loop` (5-10 loops, when frequent hero upgrades are required for progress)
-1. `CS - Max Skills` (or `SC - Max Skills` if using Shadow Clone)
-1. `CS&SC - (60s) Attack Loop` (5-20 loops, Until progress stops)
-1. `Prestige`
-1. Optional: `BoS Max Upgrade`
+## Shadow Clone w/ Fairy (example)
+1. `SC+F - Initialize Skills`
+1. `SC+F - (120s) Attack Loop` (5-10 loops, or until progress usually slows without upgrading)
+1. `SC+F - (60s) Attack Loop` (5-10 loops, when frequent hero upgrades are required for progress)
+1. `SC+F - Max Skills`
+1. `SC+F - (60s) Attack Loop` (5-20 loops, Until progress stops)
+1. `SC+F - Prestige`
+1. Optional: `SC+F - BoS Max Upgrade`
 
 > Note: I haven't made the parts for Heavenly Strike build yet; I'm looking forward to getting to the point where using
 those builds makes sense!
@@ -36,7 +37,6 @@ The `builds` macros assume:
 1. You're running a Clan Ship or Shadow Clone build
 1. You have MAXed out Fairy Charm
 1. You have 5 Daggers
-1. You've somehow do not have to watch ads for Fairy drops (event pass, lifetime ad-free, VIP, etc.)
 1. You have Artifact upgrade set to percentage
 
 ## CS/SC - Initialize Skills
@@ -105,7 +105,7 @@ For each, the macro will:
 
 The hope is that, by attacking between each skill increase, we minimize mana shock.
 
-## Prestige
+## All - Prestige
 
 Surprisingly, this is currently the macro that is the most likely to fail on you; the second and third prestige buttons seem to shift up/down based on the content of the windows. I haven't gotten the layout quite right yet 100% of the time, so let me know if it fails on you.
 
@@ -118,7 +118,7 @@ Surprisingly, this is currently the macro that is the most likely to fail on you
 1. Wait ~10 seconds
 1. Tap where the "Max Equipment Drops" warning might show up
 
-## BoS Max Upgrade
+## All - BoS Max Upgrade
 
 **WARNING**: *Macros can't see!!* If you recently unlocked a new artifact and it's still at the top of the list, this macro WILL UPGRADE THAT INSTEAD. Probably not what you want; so restart the game or prestige without this macro then restart
 
@@ -135,4 +135,8 @@ All of these are straight-forward: Tap and hold the part in question and squiggl
 
 ## Alt - Start an Alt Account
 
-I wouldn't recommend these just yet, but you can try 'em out if you create a new BlueStacks instance!
+You can create a new BlueStacks instance and create an alt account; these scripts will help you `Start` and do a few loops after your first prestige!
+
+## Abyss
+
+First draft of these, use at your own risk

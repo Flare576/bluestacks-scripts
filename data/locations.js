@@ -80,23 +80,24 @@ exports.astralLocations = [
 ];
 
 exports.heroUpgradeButtons = [
-    {X: 93.38, Y: 87.65},
-    {X: 93.38, Y: 83.15},
-    {X: 93.38, Y: 78.65},
-    {X: 93.38, Y: 74.15},
-    {X: 93.38, Y: 69.65},
-    {X: 93.38, Y: 65.15},
-    {X: 93.38, Y: 60.65},
-    {X: 93.38, Y: 56.15},
-    {X: 93.38, Y: 51.65},
-    {X: 93.38, Y: 47.15},
-    {X: 93.38, Y: 42.65},
-    {X: 93.38, Y: 38.15},
-    {X: 73.38, Y: 33.65},
-    {X: 73.38, Y: 29.15},
-    {X: 73.38, Y: 24.65},
-    {X: 93.38, Y: 20.15},
     {X: 93.38, Y: 15.65},
+    {X: 93.38, Y: 20.15},
+    {X: 73.38, Y: 24.65},
+    {X: 73.38, Y: 29.15},
+    {X: 73.38, Y: 33.65},
+    {X: 93.38, Y: 38.15},
+    {X: 93.38, Y: 42.65},
+    {X: 93.38, Y: 47.15},
+    {X: 93.38, Y: 51.65},
+    {X: 93.38, Y: 56.15},
+    {X: 93.38, Y: 60.65},
+    {X: 93.38, Y: 65.15},
+    {X: 93.38, Y: 69.65},
+    {X: 93.38, Y: 74.15},
+    {X: 93.38, Y: 78.65},
+    {X: 93.38, Y: 83.15},
+    {X: 93.38, Y: 87.65},
+    {X: 93.38, Y: 91.96},
 ];
 
 exports.daggers = [
@@ -111,11 +112,24 @@ exports.crewLocation = { X: 36.59, Y: 49.63 };
 exports.petLocation = { X: 52.92, Y: 48.64 };
 
 exports.fullScreenButton = { X: 80.71, Y: 54.42 };
+exports.safeTap = { X: 29.12, Y: 0.33 };
 exports.buyBox = { X: 84.31, Y: 8.43 };
 exports.maxPurchase = { X: 9.84, Y: 8.51 };
+exports.hundredPurchase = { X: 26.91, Y: 8.66 };
 exports.minPurchase = { X: 60.04, Y: 8.51 };
 exports.drops = { X: 66.67, Y: 51.68 };
 exports.masterLevel = { X: 84.11, Y: 16.06 };
+exports.prestigeButton = { X: 83.24, Y: 28.89 };
+exports.prestigePopupEvent = { X: 50.01, Y: 89.06 };
+exports.prestigePopup = { X: 49.59, Y: 84.99 };
+exports.prestigeConfirmEvent = { X: 68.57, Y: 74.84 };
+exports.prestigeConfirm = { X: 68.11, Y: 71.29 };
+exports.prestigeConfirm2 = { X: 68.47, Y: 67.46 };
+exports.discoverArtifact = {X: 80.32, Y: 19.66 };
+exports.spendRelics = {X: 47.99, Y: 68.47 };
+exports.noThanks = { X: 27.34, Y: 73.68 };
+exports.collect = { X: 71.11, Y: 73.11 };
+exports.fightBoss = { X: 88.01, Y: 2.82 };
 
 // Raids
 exports.titan = {

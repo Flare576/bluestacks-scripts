@@ -9,13 +9,35 @@ exports.onePageOfHeroes = function (macro, reversed) {
     ensureClosed(macro);
 }
 
-exports.twoPagesOfHeroes = function (macro, reversed) {
+// Normal is top-down, reversed is bottom-up
+exports.pagesOfHeroes = function (macro, pages = 2, reversed = false) {
+    macro.addKey('2', WIN_DURATION);
+    pagePartialUp(macro); // Help ensure we line up with the taps
+    if (reversed) {
+        pageDown(macro, pages);
+        for (let i=0;i<pages;i++) {
+            exports.tapNineButtons(macro, reversed);
+            pageUp(macro);
+        }
+        exports.tapNineButtons(macro, reversed);
+    } else {
+        exports.tapNineButtons(macro, reversed);
+        for (let i=1;i<pages;i++) {
+            pageDown(macro);
+            exports.tapNineButtons(macro, reversed);
+        }
+        pageUp(macro, pages - 1);
+    }
+    ensureClosed(macro);
+}
+
+exports.twoPagesOfHeroes = function (macro) {
     macro.addKey('2', WIN_DURATION);
     pagePartialUp(macro); // Help ensure we line up with the taps
     pageDown(macro);
-    exports.tapNineButtons(macro);
+    exports.tapNineButtons(macro, true);
     pageUp(macro);
-    exports.tapNineButtons(macro);
+    exports.tapNineButtons(macro, true);
     ensureClosed(macro);
 }
 

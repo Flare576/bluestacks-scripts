@@ -1,18 +1,22 @@
 const {
+    safeTap,
     drops,
     fullScreenButton,
     masterLevel,
     heroUpgradeButtons,
+    prestigePopup,
+    prestigePopupEvent,
+    prestigeConfirm,
+    prestigeConfirmEvent,
+    noThanks,
 } = require('../data/locations');
 const {
-    safeTap,
     accept,
     skip,
     save,
     mission,
     attack,
     smallMasterLevel,
-    noThanks,
     smallTopEquipButton,
     smallEquipmentCategories,
     topEquipButton,
@@ -26,11 +30,15 @@ const {
     closeSkills,
     prestigeModalCTA,
     smallPrestige,
-    prestigePopup,
-    prestigeConfirm,
     smallDiscover,
 } = require('../data/setup_locations');
-const { setMaxBuy, pagePartialUp } = require('../utilities/ui_controls');
+const {
+    setMaxBuy,
+    setHundredBuy,
+    pagePartialUp,
+    pageDown,
+    pageUp,
+} = require('../utilities/ui_controls');
 const { tapNineButtons } = require('../actions/hero_actions');
 const { HIT_DURATION, UI_DURATION, WIN_DURATION } = require('../data/durations');
 
@@ -87,7 +95,7 @@ exports.quickHeroes = function (macro, tapTop = true) {
     // tap top four, then random
     let rando = [...heroUpgradeButtons];
     if (tapTop) {
-        let top4 = rando.splice(14,4);
+        let top4 = rando.splice(0,4);
         top4.forEach(point => macro.addClick(point));
     }
     while(rando.length) {
@@ -119,7 +127,7 @@ exports.equipFirstItems = function (macro, small = false) {
 exports.firstSkillPoint = function (macro) {
     // macro.addClick(skillPointDrop, WIN_DURATION);
     macro.addClick(safeTap, WIN_DURATION);
-    macro.addKey('1', WIN_DURATION); // yay click
+    macro.addKey('1', WIN_DURATION);
     macro.addClick(smallSkillTree, WIN_DURATION);
     macro.addClick(introductionCTA, WIN_DURATION);
     macro.addClick(unlockButton, WIN_DURATION);
@@ -152,14 +160,32 @@ exports.firstArtifact = function (macro) {
 
 exports.firstPrestige = function (macro) {
     macro.addClick(prestigeModalCTA, WIN_DURATION);
+    // During events
+    macro.addClick(smallPrestige, WIN_DURATION);
+    macro.addClick(prestigePopupEvent, WIN_DURATION);
+    macro.addClick(prestigeConfirmEvent);
+    // No Event
     macro.addClick(smallPrestige, WIN_DURATION);
     macro.addClick(prestigePopup, WIN_DURATION);
     macro.addClick(prestigeConfirm, 10000);
+
     macro.addClick(safeTap, 2000);
-    macro.addClick(safeTap, 5000);
-    exports.tapDrop(macro); // dafuq
+    macro.addClick(safeTap, 10000);
+    macro.addClick(safeTap);
+    macro.addClick(safeTap);
 }
 
-exports.tapRejoin = function (macro) {
-    macro.addKey('B');
+exports.slowThreePagesOfHeroes = function (macro) {
+    const rev = [...heroUpgradeButtons].reverse();
+    macro.addKey('2', WIN_DURATION);
+    pagePartialUp(macro);
+    setMaxBuy(macro);
+    pageDown(macro, 2);
+    for (let i=0;i<2;i++) {
+        rev.forEach(loc => macro.addClick(loc, 1500))
+        pageUp(macro);
+    }
+    rev.forEach(loc => macro.addClick(loc, 1500))
+    setHundredBuy(macro);
+    macro.addKey('2', WIN_DURATION);
 }

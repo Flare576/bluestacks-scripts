@@ -6,7 +6,8 @@ const titanParts = Object.keys(titan);
 const titanDuration = 15;
 
 module.exports = () => {
-    [{
+    [ ...(titanParts.map(part => ({name:part,parts:[part]}))),
+    {
         name: 'Titan All Parts',
         parts: [...titanParts],
     },{
@@ -38,7 +39,7 @@ module.exports = () => {
         // always 30s, pad by 2s for countdown
         const titanTime = 32000;
         // Fusion bomb needs 2750 to explode... call it 3000
-        const eachPart = 3000 / (tCount - 1);
+        const eachPart = tCount > 1 ? 3000 / (tCount - 1) : titanTime;
         const eachPartSwipe = eachPart / titanDuration; // 3000 / 15 = 200 swipes
         const loopDuration = eachPart * tCount; // time per part * # of parts
         const titanLoops = titanTime / loopDuration; // time available / time per loop

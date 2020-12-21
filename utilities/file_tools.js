@@ -3,7 +3,8 @@ const path = require('path');
 const config = require('./config');
 
 const updatePath = '/mnt/c/ProgramData/BlueStacks_bgp64_hyperv/Engine/UserData/InputMapper/UserScripts';
-const standardPath = './macros';
+// const standardPath = './macros';
+const standardPath = '/mnt/c/Users/flare576/Documents/TT2_Macros';
 
 let useSubfolder = true;
 

@@ -1,5 +1,6 @@
 const {
     astralLocations,
+    astralLocationsLoot,
     daggers,
     crewLocation,
     petLocation,
@@ -7,11 +8,18 @@ const {
 const { HIT_DURATION } = require('../data/durations');
 const { clickCollect, ensureClosed } = require('../utilities/ui_controls');
 const { activateSkills } = require('../actions/master_actions');
+const config = require('../utilities/config');
 
 function tapAstrals (macro) {
+    const { tapEquipment } = config.get();
     astralLocations.forEach(({ X, Y }) => {
         macro.addClick({X, Y}, HIT_DURATION);
     });
+    if (tapEquipment) {
+        astralLocationsLoot.forEach(({ X, Y }) => {
+            macro.addClick({X, Y}, HIT_DURATION);
+        });
+    }
     clickCollect(macro);
 }
 

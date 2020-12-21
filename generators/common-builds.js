@@ -1,5 +1,5 @@
 const { tapFor } = require('../actions/combat_actions');
-const { onePageOfHeroes, twoPagesOfHeroes } = require('../actions/hero_actions');
+const { onePageOfHeroes, pagesOfHeroes } = require('../actions/hero_actions');
 const { increaseSkills, prestige } = require('../actions/master_actions');
 const { bookOfShadows } = require('../actions/artifact_actions');
 const { ensureEnlarged, ensureHeroMaxBuy, ensureBottomOfPets } = require('../utilities/ui_controls');
@@ -12,7 +12,7 @@ module.exports = [{
         { fn: ensureBottomOfPets },
         { fn: increaseSkills },
         { fn: tapFor, params: [60000] },
-        { fn: twoPagesOfHeroes },
+        { fn: pagesOfHeroes },
     ],
 },{
     name: '(60s) Attack Loop',
@@ -24,8 +24,14 @@ module.exports = [{
 },{
     name: '(120s) Attack Loop',
     calls: [
-        {fn: tapFor, params: [115000]},
+        {fn: tapFor, params: [24000]},
         {fn: onePageOfHeroes},
+        {fn: tapFor, params: [24000]},
+        { fn: pagesOfHeroes },
+        {fn: tapFor, params: [24000]},
+        {fn: onePageOfHeroes},
+        {fn: tapFor, params: [24000]},
+        { fn: pagesOfHeroes },
     ],
     mods: {LoopType: "UntilStopped"},
 },{

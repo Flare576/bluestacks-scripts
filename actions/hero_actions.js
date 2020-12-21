@@ -31,16 +31,6 @@ exports.pagesOfHeroes = function (macro, pages = 2, reversed = false) {
     ensureClosed(macro);
 }
 
-exports.twoPagesOfHeroes = function (macro) {
-    macro.addKey('2', WIN_DURATION);
-    pagePartialUp(macro); // Help ensure we line up with the taps
-    pageDown(macro);
-    exports.tapNineButtons(macro, true);
-    pageUp(macro);
-    exports.tapNineButtons(macro, true);
-    ensureClosed(macro);
-}
-
 exports.tapNineButtons = function (macro, reversed) {
     let points = [...heroUpgradeButtons];
     reversed && points.reverse();

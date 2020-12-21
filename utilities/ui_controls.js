@@ -4,6 +4,7 @@ const {
     hundredPurchase,
     minPurchase,
     collect,
+    updateNoteOK,
     noThanks,
     fightBoss,
 }
@@ -56,6 +57,10 @@ exports.clickNoThanks = function (macro) {
     macro.addClick(noThanks, HIT_DURATION * 2);
 }
 
+exports.clickUpdateNoteOK = function (macro) {
+    macro.addClick(updateNoteOK);
+}
+
 exports.pagePartialUp = function (macro, depth = 1) {
     for (let i = 0; i < depth; i++) {
         macro.addDrag({X: 49.21, Y: 16.27}, {X: 49.21, Y: 50.88});
@@ -64,13 +69,13 @@ exports.pagePartialUp = function (macro, depth = 1) {
 
 exports.pageUp = function (macro, depth = 1, duration = 6) {
     for (let i = 0; i < depth; i++) {
-        macro.addDrag({X: 49.21, Y: 23.08}, {X: 49.21, Y: 93.83});
+        macro.addDrag({X: 49.21, Y: 23.08}, {X: 49.21, Y: 93.83}, duration);
     }
 }
 
 exports.pageDown = function (macro, depth = 1, duration = 6) {
     for (let i = 0; i < depth; i++) {
-        macro.addDrag({X: 49.21, Y: 94.01}, {X: 49.21, Y: 21.51}, 20);
+        macro.addDrag({X: 49.21, Y: 94.01}, {X: 49.21, Y: 21.51}, duration);
     }
 }
 

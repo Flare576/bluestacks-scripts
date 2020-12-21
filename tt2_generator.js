@@ -6,7 +6,7 @@ const shadowCloneGen = require('./generators/shadow_clone');
 
 const config = require('./utilities/config');
 
-config.set({ updateMode: true });
+// config.set({ updateMode: true });
 
 abyssGen();
 altGen();

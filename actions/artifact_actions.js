@@ -1,5 +1,6 @@
-const { heroUpgradeButtons, discoverArtifact, spendRelics, safeTap } = require('../data/locations');
+const { heroUpgradeButtons, spendRelics, safeTap } = require('../data/locations');
 const { WIN_DURATION, UI_DURATION } = require('../data/durations');
+const { newArtifact, artifactButtons, shadowCloneProfile, abyssProfile } = require('../data/artifacts');
 const {
     pageUp,
     pageDown,
@@ -22,23 +23,48 @@ exports.bookOfShadows = function (macro) {
 
 exports.discoverArtifact = function (macro) {
     macro.addKey('5', WIN_DURATION);
-    macro.addClick(discoverArtifact, UI_DURATION);
+    // Scroll to top
+    pageUp(macro, 3);
+    macro.addClick(newArtifact, UI_DURATION);
     macro.addClick(spendRelics, UI_DURATION);
     macro.addClick(safeTap);
     macro.addClick(safeTap);
     ensureClosed(macro);
 }
 
-exports.upgradeAll = function (macro, pages = 7, taps = 3) {
-    const tappy = (coords) => { for (let i=0;i<taps;i++) macro.addClicks(coords, UI_DURATION / 2); }
-    macro.addKey('5', WIN_DURATION);
-    const locations = [...heroUpgradeButtons];
-    locations.splice(0, 2);
-    tappy(locations);
-    for (let i = 0; i < pages; i++) {
-        pageDown(macro, 1, 20);
-        tappy(locations);
+exports.upgradeAll = function (macro, artifacts = 90, taps = 3) {
+    let profile = [];
+    for (let i = 0; i < 60; i++) {
+        profile.push(3);
     }
-    pageUp(macro, pages + 1);
+    exports.applyArtifactProfile(macro, profile);
+}
+
+exports.applyArtifactProfile = function (macro, profile) {
+    const bump = (pt, ct) => {
+        for (let i = 0; i < ct; i++) {
+            macro.addClick(pt, UI_DURATION);
+        }
+    };
+    macro.addKey('5', WIN_DURATION);
+    setMinBuy(macro);
+    let artifactIdx = 0;
+    let pages = 0;
+    while (artifactIdx < profile.length) {
+        artifactButtons.forEach((point, idx) => {
+            bump(point, profile[artifactIdx++]);
+        });
+        pages++;
+        pageDown(macro, 1, 20);
+    }
+    pageUp(macro, pages+1);
     ensureClosed(macro);
+}
+
+exports.upgradeShadowClone = function (macro) {
+    exports.applyArtifactProfile(macro, shadowCloneProfile);
+}
+
+exports.upgradeAbyss = function (macro) {
+    exports.applyArtifactProfile(macro, abyssProfile);
 }

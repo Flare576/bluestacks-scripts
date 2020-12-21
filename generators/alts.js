@@ -4,10 +4,10 @@
 const config = require('../utilities/config');
 const { writeIt } = require('../utilities/file_tools');
 const Macro = require('../utilities/macro');
-const { ensureClosed, joinLeaveBoss } = require('../utilities/ui_controls');
+const { clickUpdateNoteOK, ensureClosed, joinLeaveBoss } = require('../utilities/ui_controls');
 const { prestige, activateSkills, increaseSkills } = require('../actions/master_actions');
-const { discoverArtifact, upgradeAll } = require('../actions/artifact_actions');
-const { onePageOfHeroes } = require('../actions/hero_actions');
+const { upgradeAll, discoverArtifact, bookOfShadows } = require('../actions/artifact_actions');
+const { onePageOfHeroes, pagesOfHeroes } = require('../actions/hero_actions');
 const {
     tapAccept,
     tapSkip,
@@ -24,7 +24,6 @@ const {
     firstPrestige,
     firstArtifact,
     useSkillPoints,
-    slowThreePagesOfHeroes,
 } = require('../actions/setup_actions');
 
 function fillStart (macro) {
@@ -54,6 +53,9 @@ function fillStart (macro) {
     tapSkip(macro);
     macro.sleep(5500);
     tapSave(macro);
+
+    // Patch notes pop up 
+    clickUpdateNoteOK(macro);
 
     // First missions
     tapAttack(macro, 200);
@@ -112,8 +114,11 @@ function fillStart (macro) {
 function fillLoop (macro) {
     const innerLoop = (macro) => {
         const taps = (macro) => {
-            activateSkills(macro, ['WC']);
-            tapAttack(macro, 1000);
+            activateSkills(macro, ['WC', 'DS']);
+            for(let i=0;i<5;i++) {
+                joinLeaveBoss(macro);
+                tapAttack(macro, 200);
+            }
         }
         taps(macro);
         levelSwordMaster(macro);
@@ -123,8 +128,9 @@ function fillLoop (macro) {
         onePageOfHeroes(macro, false);
         ensureClosed(macro);
     }
+    increaseSkills(macro);
     innerLoop(macro);
-    slowThreePagesOfHeroes(macro);
+    pagesOfHeroes(macro, 3, true);
     ensureClosed(macro);
     innerLoop(macro);
 }
@@ -134,9 +140,9 @@ function fillPrestige (macro) {
     tapDrop(macro);
     equipFirstItems(macro);
     ensureClosed(macro);
-    useSkillPoints(macro);
     discoverArtifact(macro);
-    upgradeAll(macro, 3, 2);
+    upgradeAll(macro, 24, 2);
+    bookOfShadows(macro);
 }
 
 module.exports = () => {

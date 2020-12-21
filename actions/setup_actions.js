@@ -2,7 +2,6 @@ const {
     safeTap,
     drops,
     fullScreenButton,
-    masterLevel,
     heroUpgradeButtons,
     prestigePopup,
     prestigePopupEvent,
@@ -39,6 +38,7 @@ const {
     pageDown,
     pageUp,
 } = require('../utilities/ui_controls');
+const { increaseSkills } = require('../actions/master_actions');
 const { tapNineButtons } = require('../actions/hero_actions');
 const { HIT_DURATION, UI_DURATION, WIN_DURATION } = require('../data/durations');
 
@@ -50,6 +50,7 @@ exports.tapMission = function (macro) { macro.addClick(mission); }
 exports.tapSave = function (macro) { macro.addClick(save); macro.addClick(save); }
 exports.tapDrop = function (macro) {
     // This interface is laggy
+    macro.addClick(drops, WIN_DURATION);
     macro.addClick(drops, WIN_DURATION);
     macro.addClick(drops, WIN_DURATION);
     macro.addClick(drops, WIN_DURATION);
@@ -76,9 +77,7 @@ exports.setupSwordMaster = function (macro) {
 }
 
 exports.levelSwordMaster = function (macro) {
-    macro.addKey('1', WIN_DURATION);
-    macro.addClick(masterLevel);
-    macro.addKey('1', WIN_DURATION);
+    increaseSkills(macro, false, []);
 }
 
 exports.setupHeroes = function (macro) {
@@ -173,19 +172,4 @@ exports.firstPrestige = function (macro) {
     macro.addClick(safeTap, 10000);
     macro.addClick(safeTap);
     macro.addClick(safeTap);
-}
-
-exports.slowThreePagesOfHeroes = function (macro) {
-    const rev = [...heroUpgradeButtons].reverse();
-    macro.addKey('2', WIN_DURATION);
-    pagePartialUp(macro);
-    setMaxBuy(macro);
-    pageDown(macro, 2);
-    for (let i=0;i<2;i++) {
-        rev.forEach(loc => macro.addClick(loc, 1500))
-        pageUp(macro);
-    }
-    rev.forEach(loc => macro.addClick(loc, 1500))
-    setHundredBuy(macro);
-    macro.addKey('2', WIN_DURATION);
 }

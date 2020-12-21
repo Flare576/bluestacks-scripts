@@ -73,11 +73,14 @@ exports.astralLocations = [
     { X: 87.94, Y: 38.08 },
     { X: 84.25, Y: 36.48 },
     { X: 96.15, Y: 46.65 },
-    // { X: 89.78, Y: 48.44 }, // Too close to loot
-    // { X: 82.91, Y: 49.29 }, // Too close to loot
-    // { X: 77.55, Y: 46.65 }, // Too close to loot
-    // { X: 71.36, Y: 49.48 }, // Too close to loot
 ];
+exports.astralLocationsLoot = [
+    { X: 89.78, Y: 48.44 }, // Too close to loot
+    { X: 82.91, Y: 49.29 }, // Too close to loot
+    { X: 77.55, Y: 46.65 }, // Too close to loot
+    { X: 71.36, Y: 49.48 }, // Too close to loot
+];
+
 
 exports.heroUpgradeButtons = [
     {X: 93.38, Y: 15.65},
@@ -110,6 +113,7 @@ exports.daggers = [
 
 exports.crewLocation = { X: 36.59, Y: 49.63 };
 exports.petLocation = { X: 52.92, Y: 48.64 };
+exports.updateNoteOK = { X: 51.19, Y: 71.64 };
 
 exports.fullScreenButton = { X: 80.71, Y: 54.42 };
 exports.safeTap = { X: 29.12, Y: 0.33 };
@@ -125,7 +129,6 @@ exports.prestigePopup = { X: 49.59, Y: 84.99 };
 exports.prestigeConfirmEvent = { X: 68.57, Y: 74.84 };
 exports.prestigeConfirm = { X: 68.11, Y: 71.29 };
 exports.prestigeConfirm2 = { X: 68.47, Y: 67.46 };
-exports.discoverArtifact = {X: 80.32, Y: 19.66 };
 exports.spendRelics = {X: 47.99, Y: 68.47 };
 exports.noThanks = { X: 27.34, Y: 73.68 };
 exports.collect = { X: 71.11, Y: 73.11 };

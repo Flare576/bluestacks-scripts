@@ -1,0 +1,226 @@
+{
+  "TimeCreated": "20210107T131547",
+  "Name": "HS - Prestige",
+  "Events": [
+    {
+      "KeyName": "1",
+      "EventType": "KeyDown",
+      "Timestamp": 1000
+    },
+    {
+      "KeyName": "1",
+      "EventType": "KeyUp",
+      "Timestamp": 1050
+    },
+    {
+      "X": 83.24,
+      "Y": 28.89,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 3050
+    },
+    {
+      "X": 83.24,
+      "Y": 28.89,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 3100
+    },
+    {
+      "X": 50.01,
+      "Y": 89.06,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 4100
+    },
+    {
+      "X": 50.01,
+      "Y": 89.06,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 4150
+    },
+    {
+      "X": 68.57,
+      "Y": 74.84,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 5150
+    },
+    {
+      "X": 68.57,
+      "Y": 74.84,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 5200
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyDown",
+      "Timestamp": 6200
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyUp",
+      "Timestamp": 6250
+    },
+    {
+      "X": 76.67,
+      "Y": 88.11,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 7250
+    },
+    {
+      "X": 76.67,
+      "Y": 88.11,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 7300
+    },
+    {
+      "X": 76.67,
+      "Y": 88.11,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 7320
+    },
+    {
+      "X": 76.67,
+      "Y": 88.11,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 7370
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyDown",
+      "Timestamp": 7390
+    },
+    {
+      "KeyName": "4",
+      "EventType": "KeyUp",
+      "Timestamp": 7440
+    },
+    {
+      "X": 27.34,
+      "Y": 73.68,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 8440
+    },
+    {
+      "X": 27.34,
+      "Y": 73.68,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 8490
+    },
+    {
+      "X": 27.34,
+      "Y": 73.68,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 8740
+    },
+    {
+      "X": 27.34,
+      "Y": 73.68,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 8790
+    },
+    {
+      "KeyName": "1",
+      "EventType": "KeyDown",
+      "Timestamp": 8830
+    },
+    {
+      "KeyName": "1",
+      "EventType": "KeyUp",
+      "Timestamp": 8880
+    },
+    {
+      "X": 83.24,
+      "Y": 28.89,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 10880
+    },
+    {
+      "X": 83.24,
+      "Y": 28.89,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 10930
+    },
+    {
+      "X": 49.59,
+      "Y": 84.99,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 11930
+    },
+    {
+      "X": 49.59,
+      "Y": 84.99,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 11980
+    },
+    {
+      "X": 68.11,
+      "Y": 71.29,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 12980
+    },
+    {
+      "X": 68.11,
+      "Y": 71.29,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 13030
+    },
+    {
+      "X": 68.47,
+      "Y": 67.46,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 14030
+    },
+    {
+      "X": 68.47,
+      "Y": 67.46,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 14080
+    },
+    {
+      "X": 50.88,
+      "Y": 65.81,
+      "Delta": 0,
+      "EventType": "MouseDown",
+      "Timestamp": 24080
+    },
+    {
+      "X": 50.88,
+      "Y": 65.81,
+      "Delta": 0,
+      "EventType": "MouseUp",
+      "Timestamp": 24130
+    }
+  ],
+  "LoopType": "TillLoopNumber",
+  "LoopNumber": 1,
+  "LoopTime": 0,
+  "LoopInterval": 0,
+  "Acceleration": "1.0",
+  "PlayOnStart": false,
+  "DonotShowWindowOnFinish": false,
+  "RestartPlayer": false,
+  "RestartPlayerAfterMinutes": 60,
+  "ShortCut": "",
+  "UserName": "",
+  "MacroId": ""
+}

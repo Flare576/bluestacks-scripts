@@ -1,32 +1,62 @@
 {
-  "TimeCreated": "20201227T110824",
+  "TimeCreated": "20201228T061118",
   "Name": "MD - Merge",
   "Events": [
     {
-      "X": 21.01,
-      "Y": 64.11,
+      "X": 14.03,
+      "Y": 71.69,
       "Delta": 0,
       "EventType": "MouseDown",
       "Timestamp": 1000
     },
     {
+      "X": 15.03,
+      "Y": 71.69,
       "Delta": 0,
       "EventType": "MouseMove",
       "Timestamp": 1050
     },
     {
-      "X": 21.01,
-      "Y": 64.11,
+      "X": 16.03,
+      "Y": 71.69,
       "Delta": 0,
       "EventType": "MouseMove",
-      "Timestamp": 1550
+      "Timestamp": 1056
     },
     {
-      "X": 21.01,
-      "Y": 64.11,
+      "X": 17.14,
+      "Y": 71.69,
+      "Delta": 0,
+      "EventType": "MouseMove",
+      "Timestamp": 1062
+    },
+    {
+      "X": 16.14,
+      "Y": 71.69,
+      "Delta": 0,
+      "EventType": "MouseMove",
+      "Timestamp": 1562
+    },
+    {
+      "X": 15.14,
+      "Y": 71.69,
+      "Delta": 0,
+      "EventType": "MouseMove",
+      "Timestamp": 1568
+    },
+    {
+      "X": 14.03,
+      "Y": 71.69,
+      "Delta": 0,
+      "EventType": "MouseMove",
+      "Timestamp": 1574
+    },
+    {
+      "X": 14.03,
+      "Y": 71.69,
       "Delta": 0,
       "EventType": "MouseUp",
-      "Timestamp": 2050
+      "Timestamp": 2074
     }
   ],
   "LoopType": "TillLoopNumber",

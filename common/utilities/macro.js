@@ -3,6 +3,7 @@ module.exports = class Macro {
     constructor (Name, mods = {}) {
         const TimeCreated = new Date().toISOString().replace(/[^\dT]/g, "").substring(0,15);
         this.next = 1000;
+        this.queue = [];
         this.content = Object.assign({},{
             TimeCreated,
             Name,
@@ -23,7 +24,17 @@ module.exports = class Macro {
     }
 
     addEvent ({ duration = 50, ...rest }) {
+        if (this.useQueue) {
+            throw new Error("can't addEvent In Queue Mode; use addQueue");
+        }
         this.content.Events.push({...rest, Timestamp: this.next})
+        this.next += duration;
+    }
+    addQueue ({notsure}){
+        if (this.useQueue) {
+            throw new Error("can't addEvent In Queue Mode; use addQueue");
+        }
+        this.queue.push({...rest, Timestamp: this.next})
         this.next += duration;
     }
 
@@ -119,5 +130,36 @@ module.exports = class Macro {
         this.startDrag(start);
         this.continueDrag(start, end, duration);
         this.endDrag(end);
+    }
+
+    useQueue () {
+        if (this.content.Events.length) {
+            throw new Error("already added Event!")
+        }
+        this.useQueue = true;
+    }
+    disableQueue () {
+        if (this.queue.length) {
+            throw new Error("already queued Event!")
+        }
+        this.useQueue = false;
+    }
+    queueKey (KeyName, duration = UI_DURATION) {
+        this.queue.push({KeyName, duration, action=this.addKey});
+    }
+    queueClicks (locations, duration = UI_DURATION){
+        locations.forEach(loc => this.queueClick(loc, duration))
+    }
+    queueClick (location, duration) {
+        this.queue.push({location, duration, action=this.addClick});
+    }
+    finalizeQueue () {
+        this.queue
+        .sort((a,b) => a.timestamp - b.timestamp)
+        .forEach(({timestamp, target, minDelay = 100, action}, idx) => {
+            // Respect the minimum time between events
+            const length = this.queue[idx+1]?.timestamp - timestamp > minDelay || minDelay;
+            this[action](target, length);
+        });
     }
 }
